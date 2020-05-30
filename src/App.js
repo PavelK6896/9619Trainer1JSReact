@@ -1,68 +1,42 @@
-import React, {Component} from 'react';
+import React, {useEffect, useReducer} from 'react';
 
+const initialState = {count: 0, text: ""};
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            clicked: false,
-            text: "class App extends React.Component {",
-            text2: "class App extends React.Component {",
-            colorText: "black",
-            ch: 0
-        }
-    }
-
-    render() {
-
-        const text1 = (event) => {
-            if (this.state.text.length !== 0) {
-                if (event.target.value[event.target.value.length - 1] === this.state.text[0]) {
-
-                    if (this.state.ch < event.target.value.length) {
-                        console.log(this.state.ch, event.target.value.length)
-
-                        this.setState(
-                            {
-                                text: this.state.text.substr(1),
-                                colorText: "black",
-                                ch: event.target.value.length
-                            })
-                    }else{
-                        console.log(this.state.ch, event.target.value.length)
-                        this.setState(
-                            {
-                                ch: event.target.value.length
-                            })
-                    }
-
-                } else {
-                    this.setState(
-                        {
-                            colorText: "red"
-                        })
-                }
-            }
-        }
-
-        return (
-            <div style={{
-                display: "flex",
-                flexDirection: "column",
-                margin: "auto",
-                maxWidth: "80%",
-            }}>
-                <h1> <pre>
-                   {this.state.text}</pre>
-                </h1>
-                <h1 style={{
-                    color: this.state.colorText
-                }}>{this.state.text2}</h1>
-                <input type="text"   onChange={text1}/>
-            </div>
-        );
+function reducer(state, action) {
+    switch (action.type) {
+        case 'increment':
+            return {count: state.count + 1, text: state.text};
+        case 'decrement':
+            return {count: state.count - 1, text: state.text};
+        case 'key':
+            return {count: state.count, text: state.text + action.key};
+        default:
+            throw new Error();
     }
 }
 
-export default App;
+export function App() {
+    const [state, dispatch] = useReducer(reducer, initialState);
+    useEffect(() => {
+        const handleEsc = (event) => {
+            dispatch({type: 'key', key: event.key})
+            console.log(event.keyCode)
+        };
+        window.addEventListener('keydown', handleEsc);
+        return () => {
+            window.removeEventListener('keydown', handleEsc);
+        };
+    }, []);
+
+    return (
+        <>
+            <p>Count: {state.count}</p>
+            <button onClick={() => dispatch({type: 'decrement'})}>-</button>
+            <button onClick={() => dispatch({type: 'increment'})}>+</button>
+            <p>Text: {state.text}</p>
+        </>
+    );
+}
+
+
+
