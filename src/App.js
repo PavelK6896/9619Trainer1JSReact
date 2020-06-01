@@ -1,19 +1,19 @@
 import React, {useEffect, useReducer} from 'react';
 
+const content1 = [
+    "background-color: transparent; = фон-цвет: прозрачный;",
+    "display: block;",
+    "display: flex;",
+    "flex-direction: column;",
+    "padding-left: 0;",
+    "margin-bottom: 0;",
+    "list-style: none;"
+]
 
 const initialState = {
     it: 0,
-    text2: [
-        "background-color: transparent; = фон-цвет: прозрачный;",
-        "display: block;",
-        "display: flex;",
-        "flex-direction: column;",
-        "padding-left: 0;",
-        "margin-bottom: 0;",
-        "list-style: none;"
-    ],
+    text2: content1[0],
     textInput: "",
-
     data: 0,
     data2: 0,
     time1: 0,
@@ -21,47 +21,68 @@ const initialState = {
     wrong: 0
 };
 
+
 function reducer(state, action) {
     switch (action.type) {
         case 'startHandler':
             console.log("startHandler")
-            return initialState
+            return {
+                it: 0,
+                text2: content1[0],
+                textInput: "",
+                data: 0,
+                data2: 0,
+                time1: 0,
+                right: 0,
+                wrong: 0
+            }
 
         case 'nextHandler':
-            console.log("nextHandler")
-            const ne = state
-            ne.it += 1
-            return ne
-
+            console.log("nextHandler ", state.it)
+            return {
+                it: state.it + 1,
+                text2: content1[state.it + 1],
+                textInput: "",
+                data: 0,
+                data2: 0,
+                time1: 0,
+                right: 0,
+                wrong: 0
+            }
         case 'key':
-            if (state.text2[state.it][0] === action.key) {
-                const ke = state
-
-                ke.text2[state.it] = state.text2[state.it].substr(1)
-                ke.textInput = state.textInput + action.key
-                ke.right += 1
-                ke.time1 = action.time1
-
-                return {
-                    it: state.it,
-                    textInput: state.textInput,
-                    data: action.data,
-                    data2: action.data2,
-
-
-
-
-
+            if (state.text2[0] === action.key) {
+                if (state.text2.length === 1) {
+                    return {
+                        it: state.it + 1,
+                        text2: content1[state.it + 1],
+                        textInput: "",
+                        data: 0,
+                        data2: 0,
+                        time1: 0,
+                        right: 0,
+                        wrong: 0
+                    }
+                } else {
+                    return {
+                        it: state.it,
+                        text2: state.text2.substr(1),
+                        textInput: state.textInput + action.key,
+                        data: action.data,
+                        data2: action.data2,
+                        time1: action.time1,
+                        right: state.right + 1,
+                        wrong: state.wrong
+                    }
                 }
+
             } else {
                 return {
                     it: state.it,
-                    count: action.count,
+                    text2: state.text2,
                     textInput: state.textInput,
                     data: action.data,
                     data2: action.data2,
                     time1: action.time1,
-                    text2: state.text2,
                     right: state.right,
                     wrong: state.wrong + 1
                 }
@@ -85,24 +106,23 @@ export function App() {
                 return
             }
 
+
             if (state.data === 0) {
                 dispatch({
                     type: 'key',
-                    count: state.count + 1,
                     key: event.key,
                     data: new Date().getTime(),
                     data2: 0,
                     time1: 0
                 })
             } else {
-                const dt = new Date().getTime() - state.data
+                const betweenData = new Date().getTime() - state.data
                 dispatch({
                     type: 'key',
-                    count: state.count,
                     key: event.key,
                     data: state.data,
-                    data2: dt,
-                    time1: dt / state.count
+                    data2: betweenData,
+                    time1: Math.round(betweenData / state.right)
                 })
             }
         };
@@ -131,20 +151,41 @@ export function App() {
     return (
         <div style={{
             paddingLeft: '30vw',
-
         }}>
+            <div>{content1.length}/{state.it + 1}</div>
             <pre style={{
                 display: "inline-block",
                 backgroundColor: '#888',
                 fontSize: '35px'
-            }}>{state.text2[state.it]}</pre>
-            <h3> Неправильно: {state.wrong} Правильно: {state.right} Осталось: {state.text2[state.it].length} </h3>
-            <h3>Time {Math.round(state.time1)} ms</h3>
+            }}>{state.text2}</pre>
+
+            <div> Неправильно: {state.wrong} Правильно: {state.right} Осталось: {state.text2.length} </div>
+            <div>Time {state.time1} ms</div>
+
             <p style={{
                 fontSize: '35px'
-            }}>Text: {state.textInput} *</p>
+            }}>Text: {state.textInput} </p>
+
             <button onClick={startHandler}>сначало</button>
             <button onClick={nextHandler}>next</button>
+
+            {
+                content1.map((number) =>
+                    <p key={number.toString()} value={number}> {number}</p>)
+            }
+            {/*<div>EEEEEEE {    Array.from(result, r => r.join("==")) }</div>*/}
+            {/**/}
+            {
+                // Array.from(content1 , r => r.join("==")).map(o => {
+                //     return (<p key={o.toString()} value={o}> {o}</p>)
+                // })
+            }
+            <p>EEEEEEEEEeeee</p>
+
+            {
+                Object.keys(state).map((number) =>
+                    <p key={number.toString()} value={number}> {number}</p>)
+            }
         </div>
     );
 }
