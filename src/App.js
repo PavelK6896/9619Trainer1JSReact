@@ -7,7 +7,6 @@ export function App() {
             if (event.keyCode === 16 || event.keyCode === 8 || event.keyCode === 18) {
                 return
             }
-
             if (state.data === 0) {
                 dispatch({
                     type: 'key',
