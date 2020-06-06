@@ -82,15 +82,19 @@ export function App() {
 
     return (
         <>
-            <div>
-                Trainer
-            </div>
-            <div>
+
+            <div style={{
+                position: "relative",
+                marginLeft: '20vw',
+            }}>
+                <div>
+                    Trainer
+                </div>
                 <div style={{
                     paddingLeft: '1vw',
-                    margin: '2px',
+
                     border: '2px solid #777',
-                    position: 'fixed'
+                    position: 'fixed',
                 }}>
 
                     <div>{content11.length}/{state.it + 1}
@@ -106,6 +110,7 @@ export function App() {
                         fontSize: '25px'
                     }}
                     >{state.text1}</div>
+
                     <pre style={{
                         display: "inline-block",
                         backgroundColor: '#888',
@@ -124,8 +129,19 @@ export function App() {
 
                 <div style={{
                     float: 'right',
-                    position: 'sticky',
+                    position: "relative"
                 }}>
+                    <div style={{
+                        border: '2px solid #555',
+                        position: 'sticky',
+                    }}>
+                        {
+                            Array.from(res, k => k.join(" - ")).map((o, index) => {
+                                return (<p key={index} value={o}>/{o}/</p>)
+                            })
+                        }
+
+                    </div>
 
                     <b><p><i>360 знаков в минуту норма для копирайтера.</i></p></b>
                     <b><p><i>940 символов в минуту рекорд.</i></p></b>
@@ -135,15 +151,7 @@ export function App() {
                     <p>250ms это 4 нажатий в секунду это 240 знаков в минуту.</p>
                     <p>100ms это 10 нажатий в секунду это 600 знаков в минуту.</p>
                     <hr/>
-                    <div style={{
-                        border: '2px solid #555',
-                    }}>
-                        {
-                            Array.from(res, r => r.join(" = ")).map(o => {
-                                return (<p key={o.toString()} value={o}> {o}</p>)
-                            })
-                        }
-                    </div>
+
                     <button onClick={btnText1}>Text</button>
                     <div style={styleText1}>
                         {
@@ -189,7 +197,8 @@ const content12 = [
 
 
 const res = new Map()
-res.set(0, "start")
+res.set(0, ["start", 0])
+res.set(99, ["end", 99])
 
 const initialState = {
     it: 0,
@@ -249,12 +258,20 @@ function reducer(state, action) {
         case 'key':
             if (state.text2[0] === action.key) {
                 if (state.text2.length === 1) {
-                    res.set(state.it + 1, state.time1 + " ms " + Math.round(60000 / state.time1) + " знаков в минуту ")
+
+                    if (res.get(state.it + 1) !== undefined){ // set new record
+                        if (res.get(state.it + 1)[1] > state.time1){
+                            res.set(state.it + 1, [state.time1 + " ms " + Math.round(60000 / state.time1) + " знаков в минуту ", state.time1])
+                        }
+                    }else {
+                        res.set(state.it + 1, [state.time1 + " ms " + Math.round(60000 / state.time1) + " знаков в минуту ", state.time1])
+                    }
+
                     if (state.it + 1 >= content11.length) {
-                        return {
-                            it: state.it,
-                            text1: content12[state.it],
-                            text2: content11[state.it],
+                        return { // end
+                            it: 0,
+                            text1: content12[0],
+                            text2: content11[0],
                             textInput: "",
                             data: 0,
                             data2: 0,
