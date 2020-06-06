@@ -51,14 +51,11 @@ export function App() {
 
     const refBtnStart = React.createRef();
     const refBtnNext = React.createRef();
-
-
+    const refCheck = React.createRef();
     const [state2, setState2] = useState(
         {
             vis: false,
-            check1: false
         })
-
 
     let styleText1;
     if (state2.vis) {
@@ -98,11 +95,11 @@ export function App() {
                 }}>
 
                     <div>{content11.length}/{state.it + 1}
-                        <input type="checkbox" onChange={() => {
-                            state2.check1 = !state2.check1;
-                            setState2(state2)
-                            console.log(state2.check1)
-                        }}/>
+                        <label><input type="checkbox" onChange={() => {
+                            //  state.check1 = !state.check1;
+                            dispatch({type: 'check1'});
+                            //refCheck.current.blur();
+                        }} ref={refCheck} defaultChecked={true}/> cycle </label>
                     </div>
 
                     <div style={{
@@ -125,6 +122,14 @@ export function App() {
                     }}>Text: {state.textInput} </p>
                     <button onClick={startHandler} ref={refBtnStart}>сначало</button>
                     <button onClick={nextHandler} ref={refBtnNext}>next</button>
+                    <br/>
+                    <div style={{
+                        maxWidth: '400px',
+                    }}>
+                        {state.time99.map((text, index) =>
+                            <i key={index} value={text}>{text} | </i>)
+                        }
+                    </div>
                 </div>
 
                 <div style={{
@@ -195,10 +200,8 @@ const content12 = [
     "список-стиль: никто;"
 ]
 
-
 const res = new Map()
 res.set(0, ["start", 0])
-res.set(99, ["end", 99])
 
 const initialState = {
     it: 0,
@@ -209,12 +212,30 @@ const initialState = {
     data2: 0,
     time1: 0,
     right: 0,
-    wrong: 0
+    wrong: 0,
+    check1: true,
+    time99: [],
 };
 
 
 function reducer(state, action) {
     switch (action.type) {
+        case 'check1':
+            console.log("check1", state.check1)
+            return {
+                it: state.it,
+                text1: state.text1,
+                text2: state.text2,
+                textInput: state.textInput,
+                data: state.data,
+                data2: state.data2,
+                time1: state.time1,
+                right: state.right,
+                wrong: state.wrong,
+                check1: !state.check1,
+                time99: state.time99,
+            }
+
         case 'startHandler':
             console.log("startHandler")
             return {
@@ -226,22 +247,26 @@ function reducer(state, action) {
                 data2: 0,
                 time1: 0,
                 right: 0,
-                wrong: 0
+                wrong: 0,
+                check1: state.check1,
+                time99: [],
             }
 
         case 'nextHandler':
             console.log("nextHandler ", state.it)
             if (state.it + 1 >= content11.length) {
                 return {
-                    it: state.it,
-                    text1: content12[state.it],
-                    text2: content11[state.it],
+                    it: 0,
+                    text1: content12[0],
+                    text2: content11[0],
                     textInput: "",
                     data: 0,
                     data2: 0,
                     time1: 0,
                     right: 0,
-                    wrong: 0
+                    wrong: 0,
+                    check1: state.check1,
+                    time99: [],
                 }
             }
             return {
@@ -253,18 +278,36 @@ function reducer(state, action) {
                 data2: 0,
                 time1: 0,
                 right: 0,
-                wrong: 0
+                wrong: 0,
+                check1: state.check1,
+                time99: [],
             }
         case 'key':
             if (state.text2[0] === action.key) {
                 if (state.text2.length === 1) {
 
-                    if (res.get(state.it + 1) !== undefined){ // set new record
-                        if (res.get(state.it + 1)[1] > state.time1){
+                    if (res.get(state.it + 1) !== undefined) { // set new record
+                        if (res.get(state.it + 1)[1] > state.time1) {
                             res.set(state.it + 1, [state.time1 + " ms " + Math.round(60000 / state.time1) + " знаков в минуту ", state.time1])
                         }
-                    }else {
+                    } else {
                         res.set(state.it + 1, [state.time1 + " ms " + Math.round(60000 / state.time1) + " знаков в минуту ", state.time1])
+                    }
+                    if (state.check1) {
+                        state.time99.push(state.time1)
+                        return { // cycle
+                            it: state.it,
+                            text1: content12[state.it],
+                            text2: content11[state.it],
+                            textInput: "",
+                            data: 0,
+                            data2: 0,
+                            time1: 0,
+                            right: 0,
+                            wrong: 0,
+                            check1: state.check1,
+                            time99: state.time99,
+                        }
                     }
 
                     if (state.it + 1 >= content11.length) {
@@ -277,10 +320,13 @@ function reducer(state, action) {
                             data2: 0,
                             time1: 0,
                             right: 0,
-                            wrong: 0
+                            wrong: 0,
+                            check1: state.check1,
+                            time99: [],
                         }
                     }
-                    return {
+
+                    return { // next
                         it: state.it + 1,
                         text1: content12[state.it + 1],
                         text2: content11[state.it + 1],
@@ -289,8 +335,11 @@ function reducer(state, action) {
                         data2: 0,
                         time1: 0,
                         right: 0,
-                        wrong: 0
+                        wrong: 0,
+                        check1: state.check1,
+                        time99: [],
                     }
+
                 } else {
                     return {
                         it: state.it,
@@ -301,7 +350,9 @@ function reducer(state, action) {
                         data2: action.data2,
                         time1: action.time1,
                         right: state.right + 1,
-                        wrong: state.wrong
+                        wrong: state.wrong,
+                        check1: state.check1,
+                        time99: state.time99,
                     }
                 }
 
@@ -315,7 +366,9 @@ function reducer(state, action) {
                     data2: action.data2,
                     time1: action.time1,
                     right: state.right,
-                    wrong: state.wrong + 1
+                    wrong: state.wrong + 1,
+                    check1: state.check1,
+                    time99: state.time99,
                 }
             }
         default:
