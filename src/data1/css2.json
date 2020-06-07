@@ -1,0 +1,16 @@
+[
+  ["background-repeat: no-repeat;", "фон-повтор: нет-повтор;" ],
+  ["background-position: right bottom;", "фон-позиция: справа внизу;"],
+  ["display: inline-block;", "дисплей: встроенный-блок;"],
+  ["text-decoration: none;", ""],
+  ["max-width: 1140px;", ""],
+  ["margin-right: auto; margin-left: auto;", ""],
+  ["overflow: scroll;", ""],
+  ["overflow: hidden;", ""],
+  ["max-width: 500px;", ""],
+  ["min-height: 50px;", ""],
+  ["margin: 0;", ""],
+  ["padding: 0;", ""],
+  ["@media (min-width: 300px) and (max-width: 500px){.header{background-color: orange;}}", "q"],
+  ["q", "q"]
+]

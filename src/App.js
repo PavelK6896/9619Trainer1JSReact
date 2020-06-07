@@ -1,10 +1,49 @@
 import React, {useEffect, useReducer, useState} from 'react';
+import spring1 from './data1/spring1.json';
+import css2 from './data1/css2.json';
+
+const css1 = [
+    ["display: flex;", "дисплей: сгибать;"],
+    ["display: block;", "дисплей: блок;"],
+    ["align-content: center;", "выравнивать-содержание: центр;"],
+    ["align-items: center;", "выравнивать-предметы: центр;"],
+    ["flex-direction: column;", "сгибать-направление: колонка;"],
+    ["background-color: transparent;", "фон-цвет: прозрачный;"],
+    ["padding-left: 0;", "набивка-левый: 0;"],
+    ["margin-bottom: 0;", "прибыль-дно: 0;"],
+    ["list-style: none;", "список-стиль: никто;"],
+]
+
+let next2 = false;
+let arr1 = css1;
+const res = new Map()
 
 export function App() {
     const [state, dispatch] = useReducer(reducer, initialState);
+
     useEffect(() => {
         const handleEsc = (event) => {
-            if (event.keyCode === 16 || event.keyCode === 8 || event.keyCode === 18) {
+            if (event.keyCode === 17) {
+                if (next2) {
+                    next2 = false
+                } else {
+                    next2 = true
+                }
+            } else {
+                if (event.keyCode === 90 && next2) {
+                    dispatch({type: 'nextHandler'})
+                    next2 = false
+                    return;
+                } else if (event.keyCode === 88 && next2) {
+                    dispatch({type: 'check1'});
+                    next2 = false
+                    return;
+                } else {
+                    next2 = false
+                }
+            }
+
+            if (event.keyCode === 16 || event.keyCode === 8 || event.keyCode === 18 || event.keyCode === 17) {
                 return
             }
             if (state.data === 0) {
@@ -34,19 +73,31 @@ export function App() {
     }, [state]);
 
     function startHandler() {
-        dispatch({
-            type: 'startHandler'
-        })
+        dispatch({type: 'startHandler'})
         refBtnStart.current.blur()
 
     }
 
     function nextHandler() {
-        dispatch({
-            type: 'nextHandler'
-        })
+        dispatch({type: 'nextHandler'})
         refBtnNext.current.blur()
     }
+
+    function check1Handler() {
+        dispatch({type: 'check1'});
+        refCheck.current.blur()
+    }
+
+    function setSpring1() {
+        arr1 = spring1;
+        dispatch({type: 'startHandler'});
+    }
+
+    function setCSS1() {
+        arr1 = css1;
+        dispatch({type: 'startHandler'});
+    }
+
 
     const refBtnStart = React.createRef();
     const refBtnNext = React.createRef();
@@ -65,7 +116,8 @@ export function App() {
     } else {
         styleText1 = {
             border: '2px solid #555',
-            display: 'none'
+            display: 'none',
+
         }
     }
 
@@ -83,35 +135,40 @@ export function App() {
                 position: "relative",
                 marginLeft: '20vw',
             }}>
+
                 <div>
                     Trainer
                 </div>
+
                 <div style={{
                     paddingLeft: '1vw',
-
                     border: '2px solid #777',
                     position: 'fixed',
                 }}>
 
-                    <div>{content11.length}/{state.it + 1}
-                        <label><input type="checkbox" onChange={() => {
-                            //  state.check1 = !state.check1;
-                            dispatch({type: 'check1'});
-                            //refCheck.current.blur();
-                        }} ref={refCheck} defaultChecked={true}/> cycle </label>
+                    <div>{arr1.length}/{state.it + 1}
+                        <label><input
+                            type="checkbox"
+                            onChange={check1Handler}
+                            ref={refCheck}
+                            checked={state.check1}
+
+                        /> cycle (ctrl + x)</label>
                     </div>
 
-                    <div style={{
-                        backgroundColor: '#ececec',
-                        fontSize: '25px'
-                    }}
-                    >{state.text1}</div>
 
                     <pre style={{
                         display: "inline-block",
                         backgroundColor: '#888',
                         fontSize: '35px'
                     }}>{state.text2}</pre>
+                    <div style={{
+                        backgroundColor: '#ececec',
+                        fontSize: '25px',
+                        marginTop: '-30px'
+                    }}
+                    >{state.text1}</div>
+
 
                     <div> Неправильно: {state.wrong} Правильно: {state.right} Осталось: {state.text2.length} </div>
                     <div>Time {state.time1} ms</div>
@@ -120,7 +177,7 @@ export function App() {
                         fontSize: '30px'
                     }}>Text: {state.textInput} </p>
                     <button onClick={startHandler} ref={refBtnStart}>сначало</button>
-                    <button onClick={nextHandler} ref={refBtnNext}>next</button>
+                    <button onClick={nextHandler} ref={refBtnNext}>next (ctrl + z)</button>
                     <br/>
                     <div style={{
                         maxWidth: '400px',
@@ -138,6 +195,8 @@ export function App() {
                     <div style={{
                         border: '2px solid #555',
                         position: 'sticky',
+                        maxHeight: '200px',
+                        overflow: 'scroll'
                     }}>
                         {
                             Array.from(res, k => k.join(" - ")).map((o, index) => {
@@ -157,12 +216,21 @@ export function App() {
                     <hr/>
 
                     <button onClick={btnText1}>Text</button>
+                    <button onClick={setSpring1}>spring1</button>
+                    <button onClick={setCSS1}>css1</button>
+                    <button onClick={() => {
+                        arr1 = css2;
+                        dispatch({type: 'startHandler'});
+                    }}>css2
+                    </button>
+
                     <div style={styleText1}>
                         {
-                            content11.map((text, index) =>
+                            arr1.map((text, index) =>
                                 <p key={index} value={text}> {index + 1} = {text}</p>)
                         }
                     </div>
+
                 </div>
             </div>
             <div style={{
@@ -175,37 +243,10 @@ export function App() {
     );
 }
 
-const content11 = [
-    "display: flex;",
-    "display: block;",
-    "align-content: center;",
-    "align-items: center;",
-    "flex-direction: column;",
-    "background-color: transparent;",
-    "padding-left: 0;",
-    "margin-bottom: 0;",
-    "list-style: none;"
-]
-
-const content12 = [
-    "дисплей: сгибать;",
-    "дисплей: блок;",
-    "выравнивать-содержание: центр;",
-    "выравнивать-предметы: центр;",
-    "сгибать-направление: колонка;",
-    "фон-цвет: прозрачный;",
-    "набивка-левый: 0;",
-    "прибыль-дно: 0;",
-    "список-стиль: никто;"
-]
-
-const res = new Map()
-res.set(0, ["start", 0])
-
 const initialState = {
     it: 0,
-    text1: content12[0],
-    text2: content11[0],
+    text1: arr1[0][1],
+    text2: arr1[0][0],
     textInput: "",
     data: 0,
     data2: 0,
@@ -239,8 +280,8 @@ function reducer(state, action) {
             console.log("startHandler")
             return {
                 it: 0,
-                text1: content12[0],
-                text2: content11[0],
+                text1: arr1[0][1],
+                text2: arr1[0][0],
                 textInput: "",
                 data: 0,
                 data2: 0,
@@ -253,11 +294,11 @@ function reducer(state, action) {
 
         case 'nextHandler':
             console.log("nextHandler ", state.it)
-            if (state.it + 1 >= content11.length) {
+            if (state.it + 1 >= arr1.length) {
                 return {
                     it: 0,
-                    text1: content12[0],
-                    text2: content11[0],
+                    text1: arr1[0][1],
+                    text2: arr1[0][0],
                     textInput: "",
                     data: 0,
                     data2: 0,
@@ -270,8 +311,8 @@ function reducer(state, action) {
             }
             return {
                 it: state.it + 1,
-                text1: content12[state.it + 1],
-                text2: content11[state.it + 1],
+                text1: arr1[state.it + 1][1],
+                text2: arr1[state.it + 1][0],
                 textInput: "",
                 data: 0,
                 data2: 0,
@@ -296,8 +337,8 @@ function reducer(state, action) {
                         state.time99.push(state.time1)
                         return { // cycle
                             it: state.it,
-                            text1: content12[state.it],
-                            text2: content11[state.it],
+                            text1: arr1[state.it][1],
+                            text2: arr1[state.it][0],
                             textInput: "",
                             data: 0,
                             data2: 0,
@@ -309,11 +350,11 @@ function reducer(state, action) {
                         }
                     }
 
-                    if (state.it + 1 >= content11.length) {
+                    if (state.it + 1 >= arr1.length) {
                         return { // end
                             it: 0,
-                            text1: content12[0],
-                            text2: content11[0],
+                            text1: arr1[0][1],
+                            text2: arr1[0][0],
                             textInput: "",
                             data: 0,
                             data2: 0,
@@ -327,8 +368,8 @@ function reducer(state, action) {
 
                     return { // next
                         it: state.it + 1,
-                        text1: content12[state.it + 1],
-                        text2: content11[state.it + 1],
+                        text1: arr1[state.it + 1][1],
+                        text2: arr1[state.it + 1][0],
                         textInput: "",
                         data: 0,
                         data2: 0,
@@ -342,7 +383,7 @@ function reducer(state, action) {
                 } else {
                     return {
                         it: state.it,
-                        text1: state.text1.substr(1),
+                        text1: state.text1,
                         text2: state.text2.substr(1),
                         textInput: state.textInput + action.key,
                         data: action.data,
