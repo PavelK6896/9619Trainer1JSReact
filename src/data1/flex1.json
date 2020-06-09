@@ -1,0 +1,37 @@
+[
+  ["display: none; contents;  flow; flow-root; table; flex; flex; ruby; block; inline; ",""],
+
+
+  ["1",""],
+
+  ["justify-content: flex-start; flex-end; center; space-between; space-around; space-evenly;",
+    "пространство-равномерно;","1]всего 12 свойств! распределяет пространство вдоль гризонтальной оси"],
+  ["align-items: flex-start; flex-end; center; stretch; baseline; ","","2]вдоль вертикальной оси"],
+  ["align-content: normal;  center; start; end; flex-start; flex-end; space-between; space-around; space-evenly; ",
+    "",    "3]между и вокруг вдоль поперечной оси больше 1 ряда"],
+  ["align-self: auto; normal; stretch;","4]переопределяя значение свойства align-items"],
+
+
+  ["1",""],
+
+
+  ["order: 5; inherit; initial; unset;","8*/"],
+
+  ["flex-direction: column; column-reverse; row; row-reverse;","1* по главной оси"],
+  ["flex-wrap: wrap; nowrap; wrap-reverse;","2* направление"],
+  ["flex-flow: column; column-reverse; row; row-reverse; wrap; nowrap; wrap-reverse;","3* flex-direction и flex-wrap"],
+
+  ["flex-grow: 5; inherit; initial; unset;","1/свободного пространства"],
+  ["flex-shrink: 0; inherit; initial; unset;","2/фактор сжатия"],
+  ["flex-basis: 0; auto; fill; max-content; min-content; fit-content; content;","3/размер контент-бокса"],
+  ["flex1: none; auto; content; 2 2 10%;","","4/grow+shrink+basis"],
+
+
+
+
+  ["1",""],
+
+
+
+  ["1",""]
+]

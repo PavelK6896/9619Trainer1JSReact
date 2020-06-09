@@ -1,8 +1,12 @@
 import React, {useEffect, useReducer, useState} from 'react';
 import spring1 from './data1/spring1.json';
+import css1 from './data1/css1.json';
 import css2 from './data1/css2.json';
+import css3 from './data1/css3.json';
+import flex1 from './data1/flex1.json';
+import word1 from './data1/word1.json';
 
-const css1 = [
+const css = [
     ["display: flex;", "дисплей: сгибать;"],
     ["display: block;", "дисплей: блок;"],
     ["align-content: center;", "выравнивать-содержание: центр;"],
@@ -73,7 +77,9 @@ export function App() {
     }, [state]);
 
     function startHandler() {
+        res.clear();
         dispatch({type: 'startHandler'})
+        refBtnStart.current.focus();
         refBtnStart.current.blur()
 
     }
@@ -88,20 +94,12 @@ export function App() {
         refCheck.current.blur()
     }
 
-    function setSpring1() {
-        arr1 = spring1;
-        dispatch({type: 'startHandler'});
-    }
-
-    function setCSS1() {
-        arr1 = css1;
-        dispatch({type: 'startHandler'});
-    }
-
 
     const refBtnStart = React.createRef();
     const refBtnNext = React.createRef();
     const refCheck = React.createRef();
+
+
     const [state2, setState2] = useState(
         {
             vis: false,
@@ -129,117 +127,222 @@ export function App() {
     }
 
     return (
-        <>
+        // body
+        <div style={{
+            margin: 0,
+            padding: 0,
+            minHeight: '100vh',
+            display: "flex",
+            flexDirection: "column",
+        }}>
 
+            {/*wrapper*/}
             <div style={{
-                position: "relative",
-                marginLeft: '20vw',
+                flexGrow: 1,
+                display: 'flex',
+                flexDirection: "row",
+                justifyContent: "space-evenly"
             }}>
 
-                <div>
-                    Trainer
-                </div>
-
-                <div style={{
-                    paddingLeft: '1vw',
-                    border: '2px solid #777',
-                    position: 'fixed',
-                }}>
-
-                    <div>{arr1.length}/{state.it + 1}
-                        <label><input
-                            type="checkbox"
-                            onChange={check1Handler}
-                            ref={refCheck}
-                            checked={state.check1}
-
-                        /> cycle (ctrl + x)</label>
-                    </div>
-
-
-                    <pre style={{
-                        display: "inline-block",
-                        backgroundColor: '#888',
-                        fontSize: '35px'
-                    }}>{state.text2}</pre>
+                {/*menu*/}
+                <>
                     <div style={{
-                        backgroundColor: '#ececec',
-                        fontSize: '25px',
-                        marginTop: '-30px'
-                    }}
-                    >{state.text1}</div>
-
-
-                    <div> Неправильно: {state.wrong} Правильно: {state.right} Осталось: {state.text2.length} </div>
-                    <div>Time {state.time1} ms</div>
-
-                    <p style={{
-                        fontSize: '30px'
-                    }}>Text: {state.textInput} </p>
-                    <button onClick={startHandler} ref={refBtnStart}>сначало</button>
-                    <button onClick={nextHandler} ref={refBtnNext}>next (ctrl + z)</button>
-                    <br/>
-                    <div style={{
-                        maxWidth: '400px',
+                        paddingLeft: '2px',
+                        border: '2px solid #777',
+                        maxWidth: '10vw',
+                        width: '10vw',
+                        overflow: "auto",
+                        display: "flex",
+                        flexDirection: "column",
                     }}>
-                        {state.time99.map((text, index) =>
-                            <i key={index} value={text}>{text} | </i>)
-                        }
-                    </div>
-                </div>
+                        <button onClick={() => {
+                            arr1 = css;
+                            startHandler();
+                        }}>css
+                        </button>
+                        <button onClick={() => {
+                            arr1 = css1;
+                            startHandler();
+                        }}>css1
+                        </button>
+                        <button onClick={() => {
+                            arr1 = css2;
+                            startHandler();
+                        }}>css2
+                        </button>
+                        <button onClick={() => {
+                            arr1 = css3;
+                            startHandler();
+                        }}>css3
+                        </button>
 
-                <div style={{
-                    float: 'right',
-                    position: "relative"
-                }}>
+
+                        <button onClick={() => {
+                            arr1 = flex1;
+                            startHandler();
+                        }}>flex1
+                        </button>
+
+                        <button onClick={() => {
+                            arr1 = spring1;
+                            startHandler();
+                        }}>spring1
+                        </button>
+
+                        <button onClick={() => {
+                            arr1 = word1;
+                            startHandler();
+                        }}>word1
+                        </button>
+
+                    </div>
+                </>
+
+                {/*main*/}
+                <>
                     <div style={{
-                        border: '2px solid #555',
-                        position: 'sticky',
-                        maxHeight: '200px',
-                        overflow: 'scroll'
+                        paddingLeft: '2px',
+                        border: '2px solid #777',
+                        maxWidth: '40vw',
+                        width: '40vw',
+                        overflow: "auto",
                     }}>
-                        {
-                            Array.from(res, k => k.join(" - ")).map((o, index) => {
-                                return (<p key={index} value={o}>/{o}/</p>)
-                            })
-                        }
+                        <div>
+                            Trainer
+                        </div>
+                        <div>{arr1.length}/{state.it + 1}
+                            <label><input
+                                type="checkbox"
+                                onChange={check1Handler}
+                                ref={refCheck}
+                                checked={state.check1}
 
+                            /> cycle (ctrl + x)</label>
+                        </div>
+
+
+                        <pre style={{
+                            display: "inline-block",
+                            backgroundColor: '#888',
+                            fontSize: '35px'
+                        }}>{state.text2}</pre>
+                        <div style={{
+                            backgroundColor: '#ececec',
+                            fontSize: '25px',
+                            marginTop: '-30px'
+                        }}
+                        >{state.text1}</div>
+
+
+                        <div> Неправильно: {state.wrong} Правильно: {state.right} Осталось: {state.text2.length} </div>
+                        <div>Time {state.time1} ms</div>
+
+                        <p style={{
+                            fontSize: '30px'
+                        }}>Text: {state.textInput} </p>
+                        <div>
+                            <button onClick={startHandler} ref={refBtnStart}>сначало</button>
+                            <button onClick={nextHandler} ref={refBtnNext}>next (ctrl + z)</button>
+                            <button onClick={btnText1}>Text</button>
+                        </div>
+
+                        <br/>
+                        {/*// локальное время*/}
+                        <div style={{
+                            maxWidth: '400px',
+
+                        }}>
+                            {state.time99.map((text, index) =>
+                                <i key={index} value={text}>{text} | </i>)
+                            }
+                        </div>
+
+                        <div style={styleText1}>
+                            {
+                                arr1.map((text, index) =>
+                                    <p key={index} value={text}> {index + 1} = {text}</p>)
+                            }
+                        </div>
                     </div>
+                </>
 
-                    <b><p><i>360 знаков в минуту норма для копирайтера.</i></p></b>
-                    <b><p><i>940 символов в минуту рекорд.</i></p></b>
-                    <b>Средний интервал между нажатиями клавишь:</b>
-                    <p>1000ms это 1 нажатие в секунду это 60 знаков в минуту.</p>
-                    <p>500ms это 2 нажатий в секунду это 120 знаков в минуту.</p>
-                    <p>250ms это 4 нажатий в секунду это 240 знаков в минуту.</p>
-                    <p>100ms это 10 нажатий в секунду это 600 знаков в минуту.</p>
-                    <hr/>
+                {/*text*/}
+                <>
+                    <div style={{
+                        paddingLeft: '2px',
+                        border: '2px solid #777',
+                        maxWidth: '30vw',
+                        width: '30vw',
+                    }}>
+                        <div style={{
+                            border: '2px solid #777',
+                            maxHeight: '20vh',
+                            height: '20vh',
+                            overflow: 'scroll',
+                        }}>
+                            <b><p><i>360 знаков в минуту норма для копирайтера.</i></p></b>
+                            <b><p><i>940 символов в минуту рекорд.</i></p></b>
+                            <b>Средний интервал между нажатиями клавишь:</b>
+                            <p>1000ms это 1 нажатие в секунду это 60 знаков в минуту.</p>
+                            <p>500ms это 2 нажатий в секунду это 120 знаков в минуту.</p>
+                            <p>250ms это 4 нажатий в секунду это 240 знаков в минуту.</p>
+                            <p>100ms это 10 нажатий в секунду это 600 знаков в минуту.</p>
 
-                    <button onClick={btnText1}>Text</button>
-                    <button onClick={setSpring1}>spring1</button>
-                    <button onClick={setCSS1}>css1</button>
-                    <button onClick={() => {
-                        arr1 = css2;
-                        dispatch({type: 'startHandler'});
-                    }}>css2
-                    </button>
+                        </div>
 
-                    <div style={styleText1}>
-                        {
-                            arr1.map((text, index) =>
-                                <p key={index} value={text}> {index + 1} = {text}</p>)
-                        }
+                        <div style={{
+                            border: '2px solid #777',
+                            maxHeight: '50vh',
+                            height: '50vh',
+                            overflow: 'scroll'
+                        }}>
+                            {
+                                Array.from(res, k => k.join(" - ")).map((o, index) => {
+                                    let s = {backgroundColor: '#938e8e'};
+                                    if (res.get(state.it + 1) !== undefined) {
+                                        const t = res.get(state.it + 1)[1];
+                                        if (t > 100 && t <= 200) {
+                                            s = {backgroundColor: 'rgba(231,126,82,0.8)'};
+                                        } else if (t > 200 && t <= 300) {
+                                            s = {backgroundColor: 'rgba(220,153,54,0.86)'};
+                                        } else if (t > 300 && t <= 400) {
+                                            s = {backgroundColor: 'rgba(166,217,41,0.82)'};
+                                        } else if (t > 400 && t <= 500) {
+                                            s = {backgroundColor: 'rgba(83,226,138,0.9)'};
+                                        } else if (t > 500 && t <= 600) {
+                                            s = {backgroundColor: '#50dff1'};
+                                        } else if (t > 600 && t <= 700) {
+                                            s = {backgroundColor: '#558dec'};
+                                        } else if (t > 700 && t <= 800) {
+                                            s = {backgroundColor: '#ab56f5'};
+                                        } else if (t > 800 && t <= 900) {
+                                            s = {backgroundColor: '#f33eea'};
+                                        }
+                                    }
+                                    return (
+                                        <p key={index} value={o} style={s} >{o} + {arr1[index]}</p>
+                                    )
+                                })
+                            }
+
+                        </div>
                     </div>
+                </>
 
-                </div>
             </div>
-            <div style={{
-                marginTop: 500,
-            }}>
-                <div className=""> &reg;&nbsp;&copy;&nbsp;2020&nbsp;Все прова защещены.
+
+            {/*footer*/}
+            <>
+                <div style={{}}>
+                    <div style={{
+                        textAlign: "center",
+                    }}>&reg;&nbsp;&copy;&nbsp;2020&nbsp;Все прова защещены.
+                    </div>
                 </div>
-            </div>
-        </>
+            </>
+
+
+        </div>
     );
 }
 
