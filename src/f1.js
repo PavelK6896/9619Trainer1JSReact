@@ -4,7 +4,9 @@ export default function setColor1(t){
 
     let s = {backgroundColor: '#938e8e'};
 
-    if (t > 100 && t <= 200) {
+    if (t > 10 && t <= 100) {
+        s = {backgroundColor: 'rgba(219,87,82,0.7)'};
+    } else if (t > 100 && t <= 200) {
         s = {backgroundColor: 'rgba(231,126,82,0.8)'};
     } else if (t > 200 && t <= 300) {
         s = {backgroundColor: 'rgba(220,153,54,0.86)'};

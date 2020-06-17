@@ -1,59 +1,22 @@
 [
-
-  ["overflow: visible; hidden; clip; scroll;  auto; (x,y) hidden visible;",
-    "переполнение: видимый; скрытый; зажим; ",""],
-  ["overflow-block: visible; hidden; scroll;  auto;","",""],
-  ["overflow-inline: visible; hidden; scroll;  auto;","переполнение-встроенный: видимый;",""],
-
-  ["2","",""],
-
-
-
-
-  ["text-decoration: underline; ","текст-украшение: подчеркивать;",""],
-   ["text-decoration","оформление текста",""],
-   ["text-decoration-color","текст-украшение-цвет",""],
-   ["text-decoration-line","текст-украшение-строка",""],
-   ["text-decoration-skip","текст-оформление-пропуск",""],
-   ["text-decoration-skip-ink","текст-украшение-пропуск-чернила",""],
-   ["text-decoration-style","текст-оформление-стиль",""],
-   ["text-decoration-thickness","текст-украшение-толщина",""],
-   ["text-emphasis","текст-акцент",""],
-   ["text-emphasis-color","текст-акцент-цвет",""],
-   ["text-emphasis-position","текст-акцент-позиция",""],
-   ["text-emphasis-style","текст-акцент-стиль",""],
-   ["text-shadow","текст-тень",""],
-   ["text-underline-offset","текст-подчеркивание-смещение",""],
-   ["text-underline-position,","текст-подчеркивание-позиция",""],
-  ["2","",""],
-
-
-
-  ["list-style-type: none;","",""],
-  ["2","",""],
-
-
-
-  ["position: absolute;","",""],
-  ["position: relative;","",""],
-  ["2","",""],
-  ["z-index: -1;1;","",""],
-  ["2","",""],
-
-
-  ["float: left;","",""],
-
-
-  ["clear: both;","",""],
-  ["2","",""],
-
-
-
-
-  ["top: 16px;","",""],
-  ["2","",""],
-
-
-
-  ["2","",""]
+  ["background","фон"],
+  ["background-repeat: no-repeat;", "фон-повтор: нет-повтор;" ],
+  ["background-position: right bottom;", "фон-позиция: справа внизу;"],
+  ["background-image:  url(\"\");","1",""],
+  ["background-repeat: no-repeat;","1",""],
+  ["background-position: right bottom;","1",""],
+  ["background-size: 50%;","1",""],
+  ["background-position: right bottom;","",""],
+  ["background-position: 25% 75%;","",""],
+  ["background-position: bottom 50px right 100px;","",""],
+  ["background-position: right 35% bottom 45%;","",""],
+  ["background-position: 0px 0px,  center;","",""],
+  ["background-position: top right 10px;","",""],
+  ["border: 1px solid #123;",""],
+  ["border-radius: 50%;","",""],
+  ["line-height:","",""],
+  ["font-family:Helvetica;","",""],
+  ["font-weight: bold;","",""],
+  ["box-shadow: 2px 3px 4px #ccc,;","",""],
+  ["text-shadow: 2px 3px 4px #ccc;","",""]
 ]

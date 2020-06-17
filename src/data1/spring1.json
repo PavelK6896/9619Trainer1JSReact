@@ -15,5 +15,14 @@
   ["@PreAuthorize", "@ПредАвторизовать"],
   ["@MockBean", "@ИздеватьсяБоб"],
   ["@SuppressWarnings(\"unchecked\")", "@ПодавлятьПредупреждения(\"непроверенный\")"],
-  ["@Bean", "@Боб"]
+  ["@Bean", "@Боб"],
+  ["@AuthenticationPrincipal", "@ИдентификацияГлавный"],
+  ["@Transient", "@Боб"],
+  ["@NotBlank(message = \"ok\")", "@"],
+  ["@Length(max = 2048, message = \"ok\")", "@"],
+  ["Session.SPRING_SECURITY_CONTEXT.authentication.principal", "@"],
+  ["custom-file-label", "@"]
 ]
+
+
+

@@ -3,23 +3,13 @@ import spring1 from './data1/spring1.json';
 import css1 from './data1/css1.json';
 import css2 from './data1/css2.json';
 import css3 from './data1/css3.json';
-import flex1 from './data1/flex1.json';
+import css4 from './data1/css4.json';
+import css5 from './data1/css5.json';
+
 import word1 from './data1/word1.json';
 import words1 from './data1/words1.json';
 import setColor1 from "./f1";
-
-
-const css = [
-    ["display: flex;", "дисплей: сгибать;"],
-    ["display: block;", "дисплей: блок;"],
-    ["align-content: center;", "выравнивать-содержание: центр;"],
-    ["align-items: center;", "выравнивать-предметы: центр;"],
-    ["flex-direction: column;", "сгибать-направление: колонка;"],
-    ["background-color: transparent;", "фон-цвет: прозрачный;"],
-    ["padding-left: 0;", "набивка-левый: 0;"],
-    ["margin-bottom: 0;", "прибыль-дно: 0;"],
-    ["list-style: none;", "список-стиль: никто;"],
-]
+import {html1, java1, js1, bootsrap1} from './data1/d1'
 
 let next2 = false;
 let arr1 = css1;
@@ -132,6 +122,10 @@ export function App() {
         })
     }
 
+
+
+
+
     return (
 
         <div style={{
@@ -163,11 +157,8 @@ export function App() {
                     display: "flex",
                     flexDirection: "column",
                 }}>
-                    <button onClick={() => {
-                        arr1 = css;
-                        startHandler();
-                    }}>css
-                    </button>
+
+
                     <button onClick={() => {
                         arr1 = css1;
                         startHandler();
@@ -183,13 +174,17 @@ export function App() {
                         startHandler();
                     }}>css3
                     </button>
-
-
                     <button onClick={() => {
-                        arr1 = flex1;
+                        arr1 = css4;
                         startHandler();
-                    }}>flex1
+                    }}>css4
                     </button>
+                    <button onClick={() => {
+                        arr1 = css5;
+                        startHandler();
+                    }}>css5
+                    </button>
+
 
                     <button onClick={() => {
                         arr1 = spring1;
@@ -207,6 +202,27 @@ export function App() {
                         arr1 = words1;
                         startHandler();
                     }}>words1
+                    </button>
+
+                    <button onClick={() => {
+                        arr1 = html1;
+                        startHandler();
+                    }}>html1
+                    </button>
+                    <button onClick={() => {
+                        arr1 = js1;
+                        startHandler();
+                    }}>js1
+                    </button>
+                    <button onClick={() => {
+                        arr1 = java1;
+                        startHandler();
+                    }}>java1
+                    </button>
+                    <button onClick={() => {
+                        arr1 = bootsrap1;
+                        startHandler();
+                    }}>bootsrap1
                     </button>
 
                 </div>
@@ -289,8 +305,8 @@ export function App() {
                         height: '20vh',
                         overflow: 'scroll',
                     }}>
-                        <b><p><i>360 знаков в минуту норма для копирайтера.</i></p></b>
-                        <b><p><i>940 символов в минуту рекорд.</i></p></b>
+                        <b><p><i>360 знаков в минуту норма для копирайтера. 166ms</i></p></b>
+                        <b><p><i>940 символов в минуту рекорд. 63ms</i></p></b>
                         <b>Средний интервал между нажатиями клавишь:</b>
                         <p>1000ms это 1 нажатие в секунду это 60 знаков в минуту.</p>
                         <p>500ms это 2 нажатий в секунду это 120 знаков в минуту.</p>
