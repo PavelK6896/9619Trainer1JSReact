@@ -12,7 +12,7 @@ import setColor1 from "./f1";
 import {html1, java1, js1, bootsrap1} from './data1/d1'
 
 let next2 = false;
-let arr1 = css1;
+let arr1 = java1;
 const res = new Map()
 
 export function App() {
@@ -121,9 +121,6 @@ export function App() {
             check1: state2.check1
         })
     }
-
-
-
 
 
     return (
@@ -315,16 +312,20 @@ export function App() {
 
                     </div>
 
-                    <div style={{
+                    <div style={{//3 bloc 2
                         border: '2px solid #777',
                         maxHeight: '50vh',
                         height: '50vh',
                         overflow: 'scroll'
                     }}>
 
-                        {Array.from(res).map((o, index) =>
-                            <i key={index} value={o}
-                               style={setColor1(o[1][1])}>{arr1[index][0].slice(0, 4)} [{o[1][0]} <br/></i>)}
+                        {Array
+                            .from(res)
+                            .map(function (o, index) {
+                                return <i key={index} value={o}
+                                          style={setColor1(o[1][1])}>\{arr1[o[0] - 1][0].slice(0, 4)} [{o[1][0]}
+                                    <br/></i>
+                            })}
 
                     </div>
                 </div>
