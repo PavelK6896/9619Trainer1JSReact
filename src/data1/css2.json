@@ -1,19 +1,10 @@
 [
-  ["background","фон"],
-  ["background-repeat: no-repeat;", "фон-повтор: нет-повтор;" ],
-  ["background-position: right bottom;", "фон-позиция: справа внизу;"],
-  ["background-image:  url(\"\");","1",""],
-  ["background-repeat: no-repeat;","1",""],
-  ["background-position: right bottom;","1",""],
-  ["background-size: 50%;","1",""],
-  ["background-position: right bottom;","",""],
-  ["background-position: 25% 75%;","",""],
-  ["background-position: bottom 50px right 100px;","",""],
-  ["background-position: right 35% bottom 45%;","",""],
-  ["background-position: 0px 0px,  center;","",""],
-  ["background-position: top right 10px;","",""],
+
+
   ["border: 1px solid #123;",""],
   ["border-radius: 50%;","",""],
+
+
   ["line-height:","",""],
   ["font-family:Helvetica;","",""],
   ["font-weight: bold;","",""],

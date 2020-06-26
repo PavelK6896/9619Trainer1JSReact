@@ -1,16 +1,26 @@
 [
-  ["display: none;",""],
-  ["display: contents;",""],
-  ["display: flow;",""],
-  ["display: flow-root;",""],
-  ["display: table;",""],
-  ["display: flex;",""],
-  ["display: ruby;",""],
-  ["display: block;",""],
+  ["display: none;","дисплей: никто;",7],
+  ["display: contents;","дисплей: содержание;",7],
+  ["display: flow;","дисплей: поток;",7],
+  ["display: flow-root;","дисплей: поток-корень;",7],
+  ["display: table;","дисплей: стол;",7],
+  ["display: flex;","дисплей: сгибать;",7],
+  ["display: ruby;","дисплей: рубин;",7],
+  ["display: block;","дисплей: блок;",7],
 
-  ["justify-content: flex-start; flex-end; center; space-between; space-around; space-evenly;",
-    "пространство-равномерно;","1]всего 12 свойств! распределяет пространство вдоль гризонтальной оси"],
+  ["justify-content: flex-start;","оправдывать-содержание: сгибать-начало;",7],
+  ["justify-content: flex-end;","оправдывать-содержание: сгибать-конец;",7],
+  ["justify-content: center;","оправдывать-содержание: центр;",7],
+  ["justify-content: space-between;","оправдывать-содержание: пространство-между;",7],
+  ["justify-content: space-around;","оправдывать-содержание: пространство-вокруг;",7],
+  ["justify-content: space-evenly;","оправдывать-содержание: пространство-равномерно;",7],
+
+
+
   ["align-items: flex-start; flex-end; center; stretch; baseline; ","","2]вдоль вертикальной оси"],
+
+
+  
   ["align-content: normal;  center; start; end; flex-start; flex-end; space-between; space-around; space-evenly; ",
     "",    "3]между и вокруг вдоль поперечной оси больше 1 ряда"],
   ["align-self: auto; normal; stretch;","4]переопределяя значение свойства align-items"],
@@ -25,4 +35,5 @@
   ["flex-shrink: 0; inherit; initial; unset;","2/фактор сжатия"],
   ["flex-basis: 0; auto; fill; max-content; min-content; fit-content; content;","3/размер контент-бокса"],
   ["flex1: none; auto; content; 2 2 10%;","","4/grow+shrink+basis"]
+
 ]

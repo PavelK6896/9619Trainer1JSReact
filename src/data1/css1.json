@@ -1,28 +1,44 @@
 [
-  ["width: 150px","ширина"],
-  ["width: 50%","ширина"],
-  ["height: 150px","высота"],
-  ["height: 50%","высота"],
-  ["max-width: 170vw;", "максимум-ширина"],
-  ["min-width: 490rem;", "минимум-ширина"],
-  ["max-height: 160vh;", "максимум-высота"],
-  ["min-height: 410rem;", "минута-высота"],
-  ["margin: 0;", "прибыль"],
-  ["margin: top-bottom right-left;", "прибыль"],
-  ["margin: top right-left bottom;", "прибыль"],
-  ["margin: top right bottom left;", "прибыль"],
-  ["margin-right: 20px;", "прибыль-право"],
-  ["margin-left: 30rem;", "прибыль-левый"],
-  ["margin-top: 40vw;", "прибыль-верхний"],
-  ["margin-bottom: 50vh;", "прибыль-дно"],
-  ["padding: 0;", "набивка"],
-  ["padding: top-bottom right-left;", "набивка"],
-  ["padding: top right-left bottom;", "набивка"],
-  ["padding: top right bottom left;", "набивка"],
-  ["padding-right: 90px;", "набивка-право"],
-  ["padding-left: 60rem;", "набивка-левый"],
-  ["padding-top: 70vw;", "набивка-верхний"],
-  ["padding-bottom: 80vh;", "набивка-дно"]
+  ["width: 150px","ширина",1],
+  ["width: 50%","ширина",1],
+  ["height: 150px","высота",1],
+  ["height: 50%","высота",1],
+  ["max-width: 170vw;", "максимум-ширина",1],
+  ["min-width: 490rem;", "минимум-ширина",1],
+  ["max-height: 160vh;", "максимум-высота",1],
+  ["min-height: 410rem;", "минута-высота",1],
+
+  ["margin: 0;", "прибыль",2],
+  ["margin: top-bottom right-left;", "прибыль",2],
+  ["margin: top right-left bottom;", "прибыль",2],
+  ["margin: top right bottom left;", "прибыль",2],
+  ["margin-right: 20px;", "прибыль-право",2],
+  ["margin-left: 30rem;", "прибыль-левый",2],
+  ["margin-top: 40vw;", "прибыль-верхний",2],
+  ["margin-bottom: 50vh;", "прибыль-дно",2],
+  ["padding: 0;", "набивка",2],
+  ["padding: top-bottom right-left;", "набивка",2],
+  ["padding: top right-left bottom;", "набивка",2],
+  ["padding: top right bottom left;", "набивка",2],
+  ["padding-right: 90px;", "набивка-право",2],
+  ["padding-left: 60rem;", "набивка-левый",2],
+  ["padding-top: 70vw;", "набивка-верхний",2],
+  ["padding-bottom: 80vh;", "набивка-дно",2],
+
+  ["background: #555;","фон",3],
+  ["background-color: #567;","фон-цвет",3],
+  ["background-image: url('');","фон-изображение",3],
+  ["background-size: 50%;","фон-размер",3],
+  ["background-repeat: no-repeat;", "фон-повтор: нет-повтор;",3],
+  ["background-position: right bottom;", "фон-позиция: справа внизу;",3],
+  ["background-position: bottom 50px right 100px;","",3],
+  ["background-position: 25% 75%;","",3],
+  ["background-position: top right 10px;","",3]
+
+
+
+
+
 ]
 
 
