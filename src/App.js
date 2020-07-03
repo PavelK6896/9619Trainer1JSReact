@@ -19,7 +19,7 @@ const initialState = {
     right: 0,
     wrong: 0,
     check1: false,
-    check2: false,
+    check2: true,
     time99: [],
 };
 
@@ -191,13 +191,17 @@ export function App() {
                         Trainer
                     </div>
                     <div>{arr1.length}/{state.it + 1}
-                        <label><input
+                        <label>
+                            <input type="number"/>
+
+                            <input
                             type="checkbox"
                             onChange={check1Handler}
                             ref={refCheck}
                             checked={state.check1}
 
                         /> cycle (ctrl + x)</label>
+
 
                         <label><input
                             type="checkbox"

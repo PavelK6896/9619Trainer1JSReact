@@ -1,12 +1,8 @@
 import css1 from "../data1/css1.json";
-import css2 from "../data1/css2.json";
-import css3 from "../data1/css3.json";
-import css4 from "../data1/css4.json";
-import css5 from "../data1/css5.json";
 import spring1 from "../data1/spring1.json";
 import word1 from "../data1/word1.json";
 import words1 from "../data1/words1.json";
-import {bootsrap1, html1, java1, js1} from "../data1/d1";
+import {bootsrap1, html1, html5, kotlin1, java1, js1} from "../data1/d1";
 import React from "react";
 
 
@@ -21,40 +17,39 @@ export const Menu1 = ({startHandler, setData}) => {
             display: "flex",
             flexDirection: "column",
         }}>
-            <button onClick={() => {
-                setData(css1);
-                startHandler();
-            }}>css1
-            </button>
+
             <button onClick={() => {
 
-                setData(css2);
+                setData(java1);
                 startHandler();
-            }}>css2
+            }}>java
             </button>
-            <button onClick={() => {
-                setData(css3);
-                startHandler();
-            }}>css3
-            </button>
+
+
             <button onClick={() => {
 
-                setData(css4);
+                setData(kotlin1);
                 startHandler();
-            }}>css4
+            }}>kotlin
             </button>
+
             <button onClick={() => {
 
-                setData(css5);
+                setData(js1);
                 startHandler();
-            }}>css5
+            }}>java script
             </button>
+
+
+
+
             <button onClick={() => {
 
                 setData(spring1);
                 startHandler();
-            }}>spring1
+            }}>spring
             </button>
+
 
             <button onClick={() => {
 
@@ -62,6 +57,11 @@ export const Menu1 = ({startHandler, setData}) => {
                 startHandler();
             }}>word1
             </button>
+
+
+
+
+
 
             <button onClick={() => {
 
@@ -74,25 +74,28 @@ export const Menu1 = ({startHandler, setData}) => {
 
                 setData(html1);
                 startHandler();
-            }}>html1
+            }}>html
             </button>
             <button onClick={() => {
 
-                setData(js1);
+                setData(html5);
                 startHandler();
-            }}>js1
+            }}>html5
             </button>
-            <button onClick={() => {
 
-                setData(java1);
+            <button onClick={() => {
+                setData(css1);
                 startHandler();
-            }}>java1
+            }}>css
             </button>
+
+
+
             <button onClick={() => {
 
                 setData(bootsrap1);
                 startHandler();
-            }}>bootsrap1
+            }}>boot s rap
             </button>
 
         </div>
