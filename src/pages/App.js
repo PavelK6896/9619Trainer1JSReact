@@ -1,11 +1,12 @@
 import React, {useEffect, useReducer, useState} from 'react';
-import setColor1 from "./f1";
-import {java1} from './data1/d1'
-import {reducer} from "./reducer";
-import {Menu1} from "./components/menu";
+import setColor1 from "../util/f1";
+import {reducer} from "../util/reducer";
+import {java1, kotlin1} from '../data1/d1'
+import {Menu1} from "../components/menu";
+import {Keyboard} from "../components/keyboard";
 
 let next2 = false;
-let arr1 = java1;
+let arr1 = kotlin1;
 const res = new Map()
 
 const initialState = {
@@ -18,9 +19,11 @@ const initialState = {
     time1: 0,
     right: 0,
     wrong: 0,
-    check1: false,
+    check1: true,
     check2: true,
     time99: [],
+    count1: 5,
+    count0: 5
 };
 
 export function App() {
@@ -28,12 +31,15 @@ export function App() {
     const [state2, setState2] = useState(
         {
             vis: false,
+            key1: "a"
         })
     let styleText1;
 
 
     useEffect(() => {
-        const handleEsc = (event) => {
+        const handle = (event) => {
+
+            setState2({...state2, key1: event.key});
 
 
             if (event.keyCode === 17) {
@@ -91,9 +97,9 @@ export function App() {
             }
         };
 
-        window.addEventListener('keydown', handleEsc);
+        window.addEventListener('keydown', handle);
         return () => {
-            window.removeEventListener('keydown', handleEsc);
+            window.removeEventListener('keydown', handle);
         };
     }, [state]);
 
@@ -153,8 +159,17 @@ export function App() {
             check1: state2.check1
         })
     }
+    
+    function count1Handler(e) {
 
+        console.log(e.target.value)
+        dispatch({type: 'count1', count: e.target.value})
+        refBtnStart.current.focus();
+        refBtnStart.current.blur()
 
+    }
+
+////////////////////////render/////////////////////////////////////////////////////////////
     return (
 
         <div style={{
@@ -191,33 +206,58 @@ export function App() {
                         Trainer
                     </div>
                     <div>{arr1.length}/{state.it + 1}
-                        <label>
-                            <input type="number"/>
-
+                        <label style={{
+                            margin: '0 25px'
+                        }}
+                        >
+                            {state.count1}
                             <input
-                            type="checkbox"
-                            onChange={check1Handler}
-                            ref={refCheck}
-                            checked={state.check1}
+                                type="checkbox"
+                                onChange={check1Handler}
+                                ref={refCheck}
+                                checked={state.check1}
+                            />
+                            cycle (ctrl + x)
+                            <input
+                                style={{
+                                    width: '50px'
+                                }}
 
-                        /> cycle (ctrl + x)</label>
+                                type="number"
+                                defaultValue={state.count1}
+                                onChange={count1Handler}
+                            />
+
+                        </label>
 
 
                         <label><input
                             type="checkbox"
                             onChange={check2Handler}
                             checked={state.check2}
-
                         /> error (ctrl + с)</label>
-
                     </div>
 
+                    <div style={{
+                        backgroundColor: '#ececec',
+                        fontSize: '25px',
+                        marginTop: '25px'
+                    }}
+                    >{state.text1}</div>
 
                     <pre style={{
-                        display: "inline-block",
-                        backgroundColor: '#888',
-                        fontSize: '35px'
+                        display: 'flex',
+                        backgroundColor: 'rgba(136,136,136,0.64)',
+                        fontSize: '35px',
+
+                        justifyContent: "center"
+
+
+
                     }}>{state.text2}</pre>
+
+
+
                     <div style={{
                         backgroundColor: '#ececec',
                         fontSize: '25px',
@@ -225,13 +265,21 @@ export function App() {
                     }}
                     >{state.text1}</div>
 
-
-                    <div> Неправильно: {state.wrong} Правильно: {state.right} Осталось: {state.text2.length} </div>
-                    <div>Time {state.time1} ms</div>
-
                     <p style={{
-                        fontSize: '30px'
-                    }}>Text: {state.textInput} </p>
+                        display: 'flex',
+                        justifyContent: "center",
+                        fontSize: '35px',
+                        backgroundColor: 'rgba(136,136,136,0.64)',
+                        height: '50px'
+                    }}>{state.textInput} </p>
+
+
+                    <div>  <div>Time {state.time1} ms</div> Неправильно: {state.wrong} Правильно: {state.right} Осталось: {state.text2.length} </div>
+
+
+
+
+
                     <div>
                         <button onClick={startHandler} ref={refBtnStart}>сначало</button>
                         <button onClick={nextHandler} ref={refBtnNext}>next (ctrl + z)</button>
@@ -247,6 +295,8 @@ export function App() {
                             <i key={index} value={text} style={setColor1(text)}> {text} | </i>)
                         }
                     </div>
+
+                    <Keyboard key1={state2.key1}></Keyboard>
 
                     <div style={styleText1}>
                         {
@@ -296,8 +346,6 @@ export function App() {
 
                     </div>
                 </div>
-
-
             </div>
 
 
