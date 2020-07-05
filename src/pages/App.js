@@ -1,7 +1,7 @@
 import React, {useEffect, useReducer, useState} from 'react';
 import setColor1 from "../util/f1";
 import {reducer} from "../util/reducer";
-import {java1, kotlin1} from '../data1/d1'
+import {kotlin1} from '../data1/d1'
 import {Menu1} from "../components/menu";
 import {Keyboard} from "../components/keyboard";
 
@@ -23,7 +23,9 @@ const initialState = {
     check2: true,
     time99: [],
     count1: 5,
-    count0: 5
+    count0: 5,
+    wrong2: false
+    
 };
 
 export function App() {
@@ -34,6 +36,7 @@ export function App() {
             key1: "a"
         })
     let styleText1;
+    let styleMain1;
 
 
     useEffect(() => {
@@ -78,18 +81,17 @@ export function App() {
                     key: event.key,
                     data: new Date().getTime(),
                     data2: 0,
-                    time1: 0,
+
                     arr1: arr1,
                     res
                 })
             } else {
-                const betweenData = new Date().getTime() - state.data
+                const allTime = new Date().getTime() - state.data
                 dispatch({
                     type: 'key',
                     key: event.key,
-                    data: state.data,
-                    data2: betweenData,
-                    time1: Math.round(betweenData / state.right),
+                    data: state.data, // time start
+                    data2: allTime, // all time
                     arr1: arr1,
                     res
 
@@ -137,6 +139,16 @@ export function App() {
     const refCheck = React.createRef();
 
 
+    console.log(state.wrong2)
+    if (state.wrong2 === false){
+        styleMain1 = {}
+    }else{
+        styleMain1 = {
+            color: 'red'
+        }
+    }
+
+
     if (state2.vis) {
         styleText1 = {
             border: '2px solid #555',
@@ -156,13 +168,11 @@ export function App() {
     function btnText1() {
         setState2({
             vis: !state2.vis,
-            check1: state2.check1
         })
     }
     
     function count1Handler(e) {
 
-        console.log(e.target.value)
         dispatch({type: 'count1', count: e.target.value})
         refBtnStart.current.focus();
         refBtnStart.current.blur()
@@ -245,7 +255,9 @@ export function App() {
                     }}
                     >{state.text1}</div>
 
-                    <pre style={{
+                    <pre style={{ // main
+
+                        ...styleMain1,
                         display: 'flex',
                         backgroundColor: 'rgba(136,136,136,0.64)',
                         fontSize: '35px',
@@ -274,7 +286,7 @@ export function App() {
                     }}>{state.textInput} </p>
 
 
-                    <div>  <div>Time {state.time1} ms</div> Неправильно: {state.wrong} Правильно: {state.right} Осталось: {state.text2.length} </div>
+                    <div>  <div>allTime {state.data2} ms</div> Неправильно: {state.wrong} Правильно: {state.right} Осталось: {state.text2.length} </div>
 
 
 
@@ -296,7 +308,7 @@ export function App() {
                         }
                     </div>
 
-                    <Keyboard key1={state2.key1}></Keyboard>
+                    <Keyboard key1={state2.key1}/>
 
                     <div style={styleText1}>
                         {
