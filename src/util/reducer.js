@@ -1,7 +1,21 @@
+import {voiceEn} from "../util/voice";
 
 export function reducer(state, action) {
+
+    function voice(en ,ru ) {
+        if (state.en && state.ru){
+            voiceEn( true, en, ru)
+        }else if (!state.en && state.ru){
+            voiceEn( true, null, ru)
+        }else if (state.en && !state.ru){
+            voiceEn( true, en, null)
+        }
+    }
+
     function endDictionary() {
         if (state.it + 1 >= action.arr1.length) {
+
+
             return {
                 ...state,
                 it: 0,
@@ -18,6 +32,10 @@ export function reducer(state, action) {
             }
 
         } else {
+
+
+            voice(action.arr1[state.it + 1][0], action.arr1[state.it + 1][1])
+
             return {
                 ...state,
                 it: state.it + 1,
@@ -35,6 +53,9 @@ export function reducer(state, action) {
         }
     }
 
+
+
+
     switch (action.type) {
         case 'count1':
             return {
@@ -43,8 +64,21 @@ export function reducer(state, action) {
                 count0: action.count
             }
 
-        case 'check1':
+        case 'ru1':
+            return {
+                ...state,
+                ru: !state.ru,
+            }
 
+        case 'en1':
+            return {
+                ...state,
+                en: !state.en,
+            }
+
+
+
+        case 'check1':
 
             return {
                 ...state,
@@ -77,7 +111,6 @@ export function reducer(state, action) {
             }
 
         case 'nextHandler':
-
             if (state.it + 1 >= action.arr1.length) {
                 return {
                     ...state,
@@ -94,6 +127,8 @@ export function reducer(state, action) {
                     count1: state.count0
                 }
             }
+
+
             return {
                 ...state,
                 it: state.it + 1,
@@ -112,7 +147,6 @@ export function reducer(state, action) {
         case 'key':
             if (state.text2[0] === action.key) { // right
                 let avgTime = Math.round(action.data2 / (state.right + 1))
-                console.log("avgTime", avgTime, "action.data2", action.data2, "/state.right", state.right)
 
 
                 if (state.text2.length === 1) { // end lines
@@ -133,7 +167,6 @@ export function reducer(state, action) {
                     }
 
 
-
                     if (state.check1) { // cycle active
 
 
@@ -141,6 +174,9 @@ export function reducer(state, action) {
                             return endDictionary();
                         }else {
                             state.time99.push(avgTime)
+
+                            voice( action.arr1[state.it][0], action.arr1[state.it ][1])
+
                             return { // cycle count next
                                 ...state,
                                 text1: action.arr1[state.it][1],
@@ -155,6 +191,7 @@ export function reducer(state, action) {
                             }
                         }
                     }
+
                     return endDictionary();
 
                 } else { // no end lines

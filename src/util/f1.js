@@ -28,6 +28,7 @@ export default function setColor1(t){
 }
 
 
+
 export const setText2 = (s) => {
     console.log(s.slice(0,4), "slice")
     return s

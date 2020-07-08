@@ -1,12 +1,12 @@
 import React, {useEffect, useReducer, useState} from 'react';
 import setColor1 from "../util/f1";
 import {reducer} from "../util/reducer";
-import {kotlin1} from '../data1/d1'
+import {java1} from '../data1/d1'
 import {Menu1} from "../components/menu";
 import {Keyboard} from "../components/keyboard";
 
 let next2 = false;
-let arr1 = kotlin1;
+let arr1 = java1;
 const res = new Map()
 
 const initialState = {
@@ -24,26 +24,30 @@ const initialState = {
     time99: [],
     count1: 5,
     count0: 5,
-    wrong2: false
+    wrong2: false,
+    en: true,
+    ru: true,
     
 };
 
+
+
 export function App() {
+
     const [state, dispatch] = useReducer(reducer, initialState);
     const [state2, setState2] = useState(
         {
             vis: false,
-            key1: "a"
+            key1: ""
         })
     let styleText1;
     let styleMain1;
 
 
     useEffect(() => {
+
         const handle = (event) => {
-
             setState2({...state2, key1: event.key});
-
 
             if (event.keyCode === 17) {
                 if (next2) {
@@ -139,7 +143,8 @@ export function App() {
     const refCheck = React.createRef();
 
 
-    console.log(state.wrong2)
+
+
     if (state.wrong2 === false){
         styleMain1 = {}
     }else{
@@ -166,18 +171,36 @@ export function App() {
     }
 
     function btnText1() {
+
         setState2({
             vis: !state2.vis,
         })
     }
+
+
+
     
     function count1Handler(e) {
 
         dispatch({type: 'count1', count: e.target.value})
         refBtnStart.current.focus();
         refBtnStart.current.blur()
-
     }
+
+    function en1Handler(e) {
+        dispatch({type: 'en1'});
+        refBtnStart.current.focus();
+        refBtnStart.current.blur()
+    }
+
+    function ru1Handler(e) {
+        dispatch({type: 'ru1'});
+        refBtnStart.current.focus();
+        refBtnStart.current.blur()
+    }
+
+
+
 
 ////////////////////////render/////////////////////////////////////////////////////////////
     return (
@@ -246,6 +269,23 @@ export function App() {
                             onChange={check2Handler}
                             checked={state.check2}
                         /> error (ctrl + с)</label>
+
+                        <label><input
+                            type="checkbox"
+                            onChange={en1Handler}
+                            checked={state.en}
+                        />en</label>
+
+                        <label><input
+                            type="checkbox"
+                            onChange={ru1Handler}
+                            checked={state.ru}
+                        />ru</label>
+
+
+                        <button onClick={() => window.speechSynthesis.cancel()}>cancel</button>
+
+
                     </div>
 
                     <div style={{
