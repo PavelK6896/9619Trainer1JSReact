@@ -27,7 +27,7 @@ export function reducer(state, action) {
                 time1: 0,
                 right: 0,
                 wrong: 0,
-                time99: [],
+              //  time99: [],
                 count1: state.count0
             }
 
@@ -47,7 +47,7 @@ export function reducer(state, action) {
                 time1: 0,
                 right: 0,
                 wrong: 0,
-                time99: [],
+             //   time99: [],
                 count1: state.count0,
             }
         }
@@ -57,12 +57,23 @@ export function reducer(state, action) {
 
 
     switch (action.type) {
+
+
+        case 'voiceCycle1':
+            return {
+                ...state,
+                voiceCycle: !state.voiceCycle,
+            }
+
+
         case 'count1':
             return {
                 ...state,
                 count1: action.count,
                 count0: action.count
             }
+
+
 
         case 'ru1':
             return {
@@ -95,6 +106,7 @@ export function reducer(state, action) {
 
         case 'startHandler':
 
+            voice(action.arr1[0][0], action.arr1[0][1])
             return {
                 ...state,
                 it: 0,
@@ -128,7 +140,7 @@ export function reducer(state, action) {
                 }
             }
 
-
+            voice(action.arr1[state.it + 1][0], action.arr1[state.it + 1][1])
             return {
                 ...state,
                 it: state.it + 1,
@@ -159,6 +171,7 @@ export function reducer(state, action) {
                         }
 
 
+
                     } else {
 
                         action.res.set(state.it + 1, [avgTime + "ms](" +
@@ -168,14 +181,21 @@ export function reducer(state, action) {
 
 
                     if (state.check1) { // cycle active
+                        if (state.count1 === state.count0){
+                            state.time99 = []
+                        }
+
+                        state.time99.push(avgTime)
 
 
                         if (state.count1 <= 1){ // cycle end
                             return endDictionary();
                         }else {
-                            state.time99.push(avgTime)
 
-                            voice( action.arr1[state.it][0], action.arr1[state.it ][1])
+
+                            if (state.voiceCycle){
+                                voice( action.arr1[state.it][0], action.arr1[state.it ][1])
+                            }
 
                             return { // cycle count next
                                 ...state,

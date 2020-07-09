@@ -1,5 +1,5 @@
 import React, {useEffect, useReducer, useState} from 'react';
-import setColor1 from "../util/f1";
+import setColor1 from "../util/color";
 import {reducer} from "../util/reducer";
 import {java1} from '../data1/d1'
 import {Menu1} from "../components/menu";
@@ -22,14 +22,14 @@ const initialState = {
     check1: true,
     check2: true,
     time99: [],
-    count1: 5,
-    count0: 5,
+    count1: 3,
+    count0: 3,
     wrong2: false,
     en: true,
     ru: true,
-    
-};
+    voiceCycle: false,
 
+};
 
 
 export function App() {
@@ -143,11 +143,9 @@ export function App() {
     const refCheck = React.createRef();
 
 
-
-
-    if (state.wrong2 === false){
+    if (state.wrong2 === false) {
         styleMain1 = {}
-    }else{
+    } else {
         styleMain1 = {
             color: 'red'
         }
@@ -178,8 +176,6 @@ export function App() {
     }
 
 
-
-    
     function count1Handler(e) {
 
         dispatch({type: 'count1', count: e.target.value})
@@ -200,6 +196,11 @@ export function App() {
     }
 
 
+    function voiceCycle1Handler(e) {
+        dispatch({type: 'voiceCycle1'});
+        refBtnStart.current.focus();
+        refBtnStart.current.blur()
+    }
 
 
 ////////////////////////render/////////////////////////////////////////////////////////////
@@ -268,19 +269,29 @@ export function App() {
                             type="checkbox"
                             onChange={check2Handler}
                             checked={state.check2}
+                            title="error start"
                         /> error (ctrl + с)</label>
 
                         <label><input
                             type="checkbox"
                             onChange={en1Handler}
                             checked={state.en}
+                            title="voice en"
                         />en</label>
 
                         <label><input
                             type="checkbox"
                             onChange={ru1Handler}
                             checked={state.ru}
+                            title="voice ru"
                         />ru</label>
+
+                        <label><input
+                            type="checkbox"
+                            onChange={voiceCycle1Handler}
+                            checked={state.voiceCycle}
+                            title="voice cycle"
+                        />cycle</label>
 
 
                         <button onClick={() => window.speechSynthesis.cancel()}>cancel</button>
@@ -305,9 +316,7 @@ export function App() {
                         justifyContent: "center"
 
 
-
                     }}>{state.text2}</pre>
-
 
 
                     <div style={{
@@ -326,10 +335,9 @@ export function App() {
                     }}>{state.textInput} </p>
 
 
-                    <div>  <div>allTime {state.data2} ms</div> Неправильно: {state.wrong} Правильно: {state.right} Осталось: {state.text2.length} </div>
-
-
-
+                    <div>
+                        <div>allTime {state.data2} ms</div>
+                        Неправильно: {state.wrong} Правильно: {state.right} Осталось: {state.text2.length} </div>
 
 
                     <div>
@@ -339,14 +347,7 @@ export function App() {
                     </div>
 
                     <br/>
-                    {/*// локальное время*/}
-                    <div style={{
-                        maxWidth: '400px',
-                    }}>
-                        {state.time99.map((text, index) =>
-                            <i key={index} value={text} style={setColor1(text)}> {text} | </i>)
-                        }
-                    </div>
+
 
                     <Keyboard key1={state2.key1}/>
 
@@ -387,14 +388,23 @@ export function App() {
                         height: '50vh',
                         overflow: 'scroll'
                     }}>
+                        {/*// локальное время*/}
+                        <div style={{
+                            maxWidth: '400px',
+                        }}>
+                            {state.time99.map((text, index) =>
+                                <i key={index} value={text} style={setColor1(text)}>{text}ms</i>)
+                            }
+                        </div>
 
                         {Array
-                            .from(res)
+                            .from(res).reverse()
                             .map(function (o, index) {
                                 return <i key={index} value={o}
                                           style={setColor1(o[1][1])}>{arr1[o[0] - 1][0].slice(0, 14)} [{o[1][0]}
                                     <br/></i>
                             })}
+
 
                     </div>
                 </div>
