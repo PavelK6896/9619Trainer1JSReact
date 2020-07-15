@@ -5,11 +5,16 @@ import words1 from "../data1/words1.json";
 import dictionary1 from "../data1/dictionary1.json";
 import dictionary2 from "../data1/dictionary2.json";
 
-import {bootsrap1, html1, html5, kotlin1, java1, js1} from "../data1/d1";
+import * as j1 from "../data1/j1";
+import * as sql from "../data1/sql";
 import React from "react";
 
 
 export const Menu1 = ({startHandler, setData}) => {
+
+
+    const sqlz =  Object.keys(sql);
+    const j1z =  Object.keys(j1);
 
     return (<div style={{
             paddingLeft: '2px',
@@ -21,30 +26,15 @@ export const Menu1 = ({startHandler, setData}) => {
             flexDirection: "column",
         }}>
 
-            <button onClick={() => {
-
-                setData(java1);
-                startHandler();
-            }}>java
-            </button>
-
-
-            <button onClick={() => {
-
-                setData(kotlin1);
-                startHandler();
-            }}>kotlin
-            </button>
-
-            <button onClick={() => {
-
-                setData(js1);
-                startHandler();
-            }}>java script
-            </button>
-
-
-
+            {
+                Object.values(j1).map(
+                    function (o, index, arr) {
+                        return (<button key={index} onClick={() => {
+                            setData(o);
+                            startHandler(j1z[index]);
+                        }}> {j1z[index]} </button>)}
+                )
+            }
 
             <button onClick={() => {
 
@@ -62,10 +52,6 @@ export const Menu1 = ({startHandler, setData}) => {
             </button>
 
 
-
-
-
-
             <button onClick={() => {
 
                 setData(words1);
@@ -73,18 +59,6 @@ export const Menu1 = ({startHandler, setData}) => {
             }}>words1
             </button>
 
-            <button onClick={() => {
-
-                setData(html1);
-                startHandler();
-            }}>html
-            </button>
-            <button onClick={() => {
-
-                setData(html5);
-                startHandler();
-            }}>html5
-            </button>
 
             <button onClick={() => {
                 setData(css1);
@@ -93,23 +67,29 @@ export const Menu1 = ({startHandler, setData}) => {
             </button>
 
 
-
-            <button onClick={() => {
-                setData(bootsrap1);
-                startHandler();
-            }}>boot s rap
-            </button>
-
             <button onClick={() => {
                 setData(dictionary1);
                 startHandler();
             }}>dictionary1
             </button>
+
             <button onClick={() => {
                 setData(dictionary2);
                 startHandler();
             }}>dictionary2
             </button>
+
+
+            {
+                Object.values(sql).map(
+                    function (o, index, arr) {
+                        return (<button key={index} onClick={() => {
+                            setData(o);
+                            startHandler(sqlz[index]);
+                        }}> {sqlz[index]} </button>)}
+                )
+            }
+
 
         </div>
     )

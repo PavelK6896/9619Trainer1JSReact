@@ -119,7 +119,8 @@ export function reducer(state, action) {
                 right: 0,
                 wrong: 0,
                 time99: [],
-                count1: state.count0
+                count1: state.count0,
+                nameData: action.nameData
             }
 
         case 'nextHandler':

@@ -1,12 +1,12 @@
 import React, {useEffect, useReducer, useState} from 'react';
 import setColor1 from "../util/color";
 import {reducer} from "../util/reducer";
-import {java1} from '../data1/d1'
+import {PostgreSQLKeyword} from '../data1/sql'
 import {Menu1} from "../components/menu";
 import {Keyboard} from "../components/keyboard";
 
 let next2 = false;
-let arr1 = java1;
+let arr1 = PostgreSQLKeyword;
 const res = new Map()
 
 const initialState = {
@@ -19,15 +19,16 @@ const initialState = {
     time1: 0,
     right: 0,
     wrong: 0,
-    check1: true,
-    check2: true,
+    check1: false,
+    check2: false,
     time99: [],
     count1: 3,
     count0: 3,
     wrong2: false,
-    en: true,
-    ru: true,
+    en: false,
+    ru: false,
     voiceCycle: false,
+    nameData: ""
 
 };
 
@@ -113,12 +114,11 @@ export function App() {
         arr1 = d;
     }
 
-    function startHandler() {
+    function startHandler(e, nameData = "") {
         res.clear();
-        dispatch({type: 'startHandler', arr1})
+        dispatch({type: 'startHandler', arr1, nameData })
         refBtnStart.current.focus();
         refBtnStart.current.blur()
-
     }
 
     function nextHandler() {
@@ -237,7 +237,7 @@ export function App() {
                     overflow: "auto",
                 }}>
                     <div>
-                        Trainer
+                        Trainer {state.nameData}
                     </div>
                     <div>{arr1.length}/{state.it + 1}
                         <label style={{
@@ -292,6 +292,13 @@ export function App() {
                             checked={state.voiceCycle}
                             title="voice cycle"
                         />cycle</label>
+
+                        <input
+                            style={{width: '50px'}}
+                            type="number"
+                            defaultValue={10}
+                            // onChange={count1Handler}
+                        /> speed voice
 
 
                         <button onClick={() => window.speechSynthesis.cancel()}>cancel</button>
@@ -393,7 +400,8 @@ export function App() {
                             maxWidth: '400px',
                         }}>
                             {state.time99.map((text, index) =>
-                                <i key={index} value={text} style={setColor1(text)}>{text}ms</i>)
+                                <i key={index} value={text} style={setColor1(text)}>{text}ms</i>
+                            )
                             }
                         </div>
 

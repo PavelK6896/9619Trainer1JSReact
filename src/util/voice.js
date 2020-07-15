@@ -14,12 +14,12 @@ export const voiceEn = (TwoSpeech, textEN, textRU) => {
         message1.text = textEN
         window.speechSynthesis.speak(message1);
 
-        console.log("voiceEn ", textEN)
+        // console.log("voiceEn ", textEN)
     }
     if (textRU != null) {
         message2.text = textRU
         window.speechSynthesis.speak(message2);
-        console.log("voiceRu ", textRU)
+        // console.log("voiceRu ", textRU)
     }
 
     message1.addEventListener('end', () => {
@@ -27,6 +27,7 @@ export const voiceEn = (TwoSpeech, textEN, textRU) => {
           //  voiceEn(false, textEN, textRU);
             TwoSpeech = false;
         }
-        console.log("end")
+        // console.log("end")
     })
+
 }
