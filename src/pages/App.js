@@ -25,11 +25,11 @@ const initialState = {
     count1: 3,
     count0: 3,
     wrong2: false,
-    en: false,
-    ru: false,
+    en: true,
+    ru: true,
     voiceCycle: false,
-    nameData: ""
-
+    nameData: "",
+    rateVoice: 5
 };
 
 
@@ -116,7 +116,7 @@ export function App() {
 
     function startHandler(e, nameData = "") {
         res.clear();
-        dispatch({type: 'startHandler', arr1, nameData })
+        dispatch({type: 'startHandler', arr1, nameData})
         refBtnStart.current.focus();
         refBtnStart.current.blur()
     }
@@ -202,6 +202,12 @@ export function App() {
         refBtnStart.current.blur()
     }
 
+    function rateVoice1Handler(e) {
+        dispatch({type: 'rateVoice1', rateVoice: e.target.value});
+        refBtnStart.current.focus();
+        refBtnStart.current.blur()
+    }
+
 
 ////////////////////////render/////////////////////////////////////////////////////////////
     return (
@@ -253,10 +259,7 @@ export function App() {
                             />
                             cycle (ctrl + x)
                             <input
-                                style={{
-                                    width: '50px'
-                                }}
-
+                                style={{width: '30px'}}
                                 type="number"
                                 defaultValue={state.count1}
                                 onChange={count1Handler}
@@ -293,13 +296,15 @@ export function App() {
                             title="voice cycle"
                         />cycle</label>
 
+                        <br/>
                         <input
-                            style={{width: '50px'}}
+                            style={{width: '30px'}}
                             type="number"
-                            defaultValue={10}
-                            // onChange={count1Handler}
-                        /> speed voice
+                            defaultValue={state.rateVoice}
+                            onChange={rateVoice1Handler}
+                        /> rate v
 
+                        {/*добавить громкость*/}
 
                         <button onClick={() => window.speechSynthesis.cancel()}>cancel</button>
 

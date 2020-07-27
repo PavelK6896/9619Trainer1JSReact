@@ -3,3 +3,6 @@
 >useEffect
 >>useReducer
 >>>useState
+
+Trainer 1 [Trainer 1](https://pavelktrainer1.web.app)
+

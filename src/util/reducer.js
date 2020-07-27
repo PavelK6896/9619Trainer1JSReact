@@ -1,20 +1,20 @@
-import {voiceEn} from "../util/voice";
+import {voiceEn, voiceName} from "./voice";
+
 
 export function reducer(state, action) {
 
     function voice(en ,ru ) {
         if (state.en && state.ru){
-            voiceEn( true, en, ru)
+            voiceEn( true, en, ru, state.rateVoice)
         }else if (!state.en && state.ru){
-            voiceEn( true, null, ru)
+            voiceEn( true, null, ru, state.rateVoice)
         }else if (state.en && !state.ru){
-            voiceEn( true, en, null)
+            voiceEn( true, en, null, state.rateVoice)
         }
     }
 
     function endDictionary() {
         if (state.it + 1 >= action.arr1.length) {
-
 
             return {
                 ...state,
@@ -58,6 +58,11 @@ export function reducer(state, action) {
 
     switch (action.type) {
 
+        case 'rateVoice1':
+            return {
+                ...state,
+                rateVoice: action.rateVoice
+            }
 
         case 'voiceCycle1':
             return {
@@ -106,6 +111,7 @@ export function reducer(state, action) {
 
         case 'startHandler':
 
+            voiceName()
             voice(action.arr1[0][0], action.arr1[0][1])
             return {
                 ...state,
