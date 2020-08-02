@@ -327,7 +327,6 @@ export function App() {
 
                         justifyContent: "center"
 
-
                     }}>{state.text2}</pre>
 
 
@@ -338,18 +337,21 @@ export function App() {
                     }}
                     >{state.text1}</div>
 
-                    <p style={{
+                    <p style={{ // не за кроя экрана как
                         display: 'flex',
                         justifyContent: "center",
                         fontSize: '35px',
                         backgroundColor: 'rgba(136,136,136,0.64)',
                         height: '50px'
-                    }}>{state.textInput} </p>
+                    }}>
+                        <input style={{fontSize: '35px',}} value={state.textInput}/>
+                    </p>
 
 
                     <div>
                         <div>allTime {state.data2} ms</div>
-                        Неправильно: {state.wrong} Правильно: {state.right} Осталось: {state.text2.length} </div>
+                        Неправильно: {state.wrong} Правильно: {state.right} Осталось: {state.text2.length}
+                    </div>
 
 
                     <div>
