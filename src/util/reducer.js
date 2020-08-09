@@ -54,9 +54,13 @@ export function reducer(state, action) {
     }
 
 
-
-
     switch (action.type) {
+
+        case 'styleKeyboard2':
+            return {
+                ...state,
+                styleKeyboard2: !state.styleKeyboard2,
+            }
 
         case 'rateVoice1':
             return {

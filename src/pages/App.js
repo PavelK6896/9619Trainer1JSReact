@@ -29,21 +29,24 @@ const initialState = {
     ru: true,
     voiceCycle: false,
     nameData: "",
-    rateVoice: 5
+    rateVoice: 5,
+    styleKeyboard2: false
 };
 
 
 export function App() {
 
     const [state, dispatch] = useReducer(reducer, initialState);
+
     const [state2, setState2] = useState(
         {
             vis: false,
-            key1: ""
+            key1: "",
         })
+
+    let styleKeyboard1;
     let styleText1;
     let styleMain1;
-
 
     useEffect(() => {
 
@@ -168,45 +171,62 @@ export function App() {
         }
     }
 
-    function btnText1() {
 
+    if (state.styleKeyboard2) {
+        styleKeyboard1 = {
+            display: 'block',
+        }
+    } else {
+        styleKeyboard1 = {
+            display: 'none',
+        }
+    }
+
+    function btnKeyboard1() {
+        dispatch({type: 'styleKeyboard2'});
+        noFocus();
+    }
+
+    function btnText1() {
         setState2({
+            ...state2,
             vis: !state2.vis,
         })
+        noFocus();
     }
 
 
     function count1Handler(e) {
-
         dispatch({type: 'count1', count: e.target.value})
-        refBtnStart.current.focus();
-        refBtnStart.current.blur()
+        noFocus();
     }
 
     function en1Handler(e) {
         dispatch({type: 'en1'});
-        refBtnStart.current.focus();
-        refBtnStart.current.blur()
+        noFocus();
     }
 
     function ru1Handler(e) {
         dispatch({type: 'ru1'});
-        refBtnStart.current.focus();
-        refBtnStart.current.blur()
+        noFocus();
     }
 
 
     function voiceCycle1Handler(e) {
         dispatch({type: 'voiceCycle1'});
-        refBtnStart.current.focus();
-        refBtnStart.current.blur()
+        noFocus();
     }
 
     function rateVoice1Handler(e) {
         dispatch({type: 'rateVoice1', rateVoice: e.target.value});
-        refBtnStart.current.focus();
+        noFocus();
+    }
+
+    function noFocus() {
+        refBtnStart.current.focus()
         refBtnStart.current.blur()
     }
+
 
 
 ////////////////////////render/////////////////////////////////////////////////////////////
@@ -344,7 +364,8 @@ export function App() {
                         backgroundColor: 'rgba(136,136,136,0.64)',
                         height: '50px'
                     }}>
-                        <input style={{fontSize: '35px',}} value={state.textInput}/>
+                        {state.textInput}
+                        {/*<input style={{fontSize: '35px',}} value={state.textInput}/>*/}
                     </p>
 
 
@@ -358,12 +379,14 @@ export function App() {
                         <button onClick={startHandler} ref={refBtnStart}>сначало</button>
                         <button onClick={nextHandler} ref={refBtnNext}>next (ctrl + z)</button>
                         <button onClick={btnText1}>Text</button>
+                        <button onClick={btnKeyboard1}>Keyboard</button>
                     </div>
-
                     <br/>
 
+                    {
+                        styleKeyboard1.display === 'block' ? <Keyboard style1={styleKeyboard1}/> : ''
+                    }
 
-                    <Keyboard key1={state2.key1}/>
 
                     <div style={styleText1}>
                         {
