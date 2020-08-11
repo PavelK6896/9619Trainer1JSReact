@@ -20,7 +20,7 @@ const initialState = {
     right: 0,
     wrong: 0,
     check1: false,
-    check2: false,
+    check2: true,
     time99: [],
     count1: 3,
     count0: 3,
@@ -30,7 +30,7 @@ const initialState = {
     voiceCycle: false,
     nameData: "",
     rateVoice: 5,
-    styleKeyboard2: false
+    styleKeyboard2: true
 };
 
 
