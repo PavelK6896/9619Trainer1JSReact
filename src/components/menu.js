@@ -7,6 +7,7 @@ import dictionary2 from "../data1/dictionary2.json";
 
 import * as j1 from "../data1/j1";
 import * as sql from "../data1/sql";
+import * as word2 from "../data1/word2";
 import React from "react";
 
 
@@ -15,6 +16,7 @@ export const Menu1 = ({startHandler, setData}) => {
 
     const sqlz =  Object.keys(sql);
     const j1z =  Object.keys(j1);
+    const word =  Object.keys(word2);
 
     return (<div style={{
             paddingLeft: '2px',
@@ -25,6 +27,16 @@ export const Menu1 = ({startHandler, setData}) => {
             display: "flex",
             flexDirection: "column",
         }}>
+
+            {
+                Object.values(word2).map(
+                    function (o, index, arr) {
+                        return (<button key={index} onClick={() => {
+                            setData(o);
+                            startHandler(word[index]);
+                        }}> {word[index]} </button>)}
+                )
+            }
 
             {
                 Object.values(j1).map(

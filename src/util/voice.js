@@ -26,9 +26,9 @@ export const voiceEn = (TwoSpeech, textEN, textRU, rateVoice) => {
     //  добавить иф
     window.speechSynthesis.cancel()
 
-    message1.volume = 1
+    message1.volume = 0.5
     message1.rate = rateVoice;
-    message2.volume = 1
+    message2.volume = 0.5
     message2.rate = rateVoice
 
     if (textEN != null) {

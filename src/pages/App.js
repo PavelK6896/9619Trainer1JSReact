@@ -1,12 +1,13 @@
 import React, {useEffect, useReducer, useState} from 'react';
 import setColor1 from "../util/color";
 import {reducer} from "../util/reducer";
-import {PostgreSQLKeyword} from '../data1/sql'
+import {word2} from "../data1/word2";
+
 import {Menu1} from "../components/menu";
 import {Keyboard} from "../components/keyboard";
 
 let next2 = false;
-let arr1 = PostgreSQLKeyword;
+let arr1 = word2;
 const res = new Map()
 
 const initialState = {
