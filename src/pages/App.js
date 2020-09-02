@@ -1,13 +1,13 @@
 import React, {useEffect, useReducer, useState} from 'react';
 import setColor1 from "../util/color";
 import {reducer} from "../util/reducer";
-import {word2} from "../data1/word2";
+import {word1} from "../data1/word";
 
 import {Menu1} from "../components/menu";
 import {Keyboard} from "../components/keyboard";
 
 let next2 = false;
-let arr1 = word2;
+let arr1 = word1;
 const res = new Map()
 
 const initialState = {
@@ -29,7 +29,7 @@ const initialState = {
     en: true,
     ru: true,
     voiceCycle: false,
-    nameData: "",
+    nameData: "word1",
     rateVoice: 5,
     styleKeyboard2: true
 };
@@ -251,10 +251,7 @@ export function App() {
                 flexDirection: "row",
                 justifyContent: "space-evenly"
             }}>
-
-
                 <Menu1 startHandler={startHandler} setData={setData}/>
-
 
                 <div style={{
                     paddingLeft: '2px',

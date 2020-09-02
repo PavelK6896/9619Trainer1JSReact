@@ -1,5 +1,8 @@
 [
 
+  ["@media (min-width: 300px) and (max-width: 500px){.header{background-color: orange;}}",
+    "@медиа (минута-ширина: 300px) и (максимум-ширина: 500px){.заголовок{фон-цвет: оранжевый;}}"],
+  ["transition:all 0.2s;","",""],
   ["white-space: nowrap;",""],
   ["font-style: normal;",""],
   ["font-weight: normal;",""],
@@ -186,9 +189,7 @@
   ["float: left;","",""],
   ["clear: both;","",""],
   ["top: 16px;","",""],
-  ["@media (min-width: 300px) and (max-width: 500px){.header{background-color: orange;}}",
-    "@медиа (минута-ширина: 300px) и (максимум-ширина: 500px){.заголовок{фон-цвет: оранжевый;}}"],
-  ["transition:all 0.2s;","",""],
+
   ["background: linear-gradient(-45deg, #788cff, #b4c8ff);","",""],
   ["p:after{}","",""],
   ["p:hover{}","",""],
