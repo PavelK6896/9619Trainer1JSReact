@@ -3,58 +3,102 @@ import {voiceEn, voiceName} from "./voice";
 
 export function reducer(state, action) {
 
-    function voice(en ,ru ) {
-        if (state.en && state.ru){
-            voiceEn( true, en, ru, state.rateVoice)
-        }else if (!state.en && state.ru){
-            voiceEn( true, null, ru, state.rateVoice)
-        }else if (state.en && !state.ru){
-            voiceEn( true, en, null, state.rateVoice)
+    function voice(en, ru) {
+        if (state.en && state.ru) {
+            voiceEn(true, en, ru, state.rateVoice)
+        } else if (!state.en && state.ru) {
+            voiceEn(true, null, ru, state.rateVoice)
+        } else if (state.en && !state.ru) {
+            voiceEn(true, en, null, state.rateVoice)
         }
     }
 
     function endDictionary() {
-        if (state.it + 1 >= action.arr1.length) {
+        if (state.it + 1 >= state.arr1.length) {
+            if (state.allDictionary) {
+                if (state.arr99.length > state.currentArr) {
+                    voice(state.arr99[state.currentArr + 1][0][0], state.arr99[state.currentArr + 1][0][1])
+                    return {
+                        ...state,
+                        it: 0,
+                        text1: state.arr99[state.currentArr + 1][0][1],
+                        text2: state.arr99[state.currentArr + 1][0][0],
+                        textInput: "",
+                        data: 0,
+                        data2: 0,
+                        time1: 0,
+                        right: 0,
+                        wrong: 0,
+                        arr1: state.arr99[state.currentArr + 1],
+                        //  time99: [],
+                        count1: 0,
+                        currentArr: state.currentArr + 1,
+                    }
 
-            return {
-                ...state,
-                it: 0,
-                text1: action.arr1[0][1],
-                text2: action.arr1[0][0],
-                textInput: "",
-                data: 0,
-                data2: 0,
-                time1: 0,
-                right: 0,
-                wrong: 0,
-              //  time99: [],
-                count1: state.count0
+                } else {
+                    voice(state.arr99[state.currentArr][0][0], state.arr99[state.currentArr][0][1])
+                    return {
+                        ...state,
+                        it: 0,
+                        text1: state.arr99[state.currentArr][0][1],
+                        text2: state.arr99[state.currentArr][0][0],
+                        arr1: state.arr99[state.currentArr],
+                        textInput: "",
+                        data: 0,
+                        data2: 0,
+                        time1: 0,
+                        right: 0,
+                        wrong: 0,
+                        //  time99: [],
+                        count1: 0,
+                        currentArr: state.currentArr,
+                    }
+                }
+
+
+            } else {
+                voice(state.arr1[0][0], state.arr1[0][1])
+                return {
+                    ...state,
+                    it: 0,
+                    text1: state.arr1[0][1],
+                    text2: state.arr1[0][0],
+                    textInput: "",
+                    data: 0,
+                    data2: 0,
+                    time1: 0,
+                    right: 0,
+                    wrong: 0,
+                    //  time99: [],
+                    count1: state.count0
+                }
             }
+
 
         } else {
 
-
-            voice(action.arr1[state.it + 1][0], action.arr1[state.it + 1][1])
-
+            voice(state.arr1[state.it + 1][0], state.arr1[state.it + 1][1])
             return {
                 ...state,
                 it: state.it + 1,
-                text1: action.arr1[state.it + 1][1],
-                text2: action.arr1[state.it + 1][0],
+                text1: state.arr1[state.it + 1][1],
+                text2: state.arr1[state.it + 1][0],
                 textInput: "",
                 data: 0,
                 data2: 0,
                 time1: 0,
                 right: 0,
                 wrong: 0,
-             //   time99: [],
+                //   time99: [],
                 count1: state.count0,
             }
         }
-    }
+
+    }//--
 
 
     switch (action.type) {
+
 
         case 'styleKeyboard2':
             return {
@@ -83,7 +127,6 @@ export function reducer(state, action) {
             }
 
 
-
         case 'ru1':
             return {
                 ...state,
@@ -96,7 +139,11 @@ export function reducer(state, action) {
                 en: !state.en,
             }
 
-
+        case 'allDictionary1':
+            return {
+                ...state,
+                allDictionary: !state.allDictionary,
+            }
 
         case 'check1':
 
@@ -116,12 +163,13 @@ export function reducer(state, action) {
         case 'startHandler':
 
             voiceName()
-            voice(action.arr1[0][0], action.arr1[0][1])
+            voice(state.arr99[action.index][0][0], state.arr99[action.index][0][1])
             return {
                 ...state,
                 it: 0,
-                text1: action.arr1[0][1],
-                text2: action.arr1[0][0],
+                text1: state.arr99[action.index][0][1],
+                text2: state.arr99[action.index][0][0],
+                arr1: state.arr99[action.index],
                 textInput: "",
                 data: 0,
                 data2: 0,
@@ -130,16 +178,17 @@ export function reducer(state, action) {
                 wrong: 0,
                 time99: [],
                 count1: state.count0,
-                nameData: action.nameData
+                nameData: action.nameData,
+                currentArr: action.index,
             }
 
         case 'nextHandler':
-            if (state.it + 1 >= action.arr1.length) {
+            if (state.it + 1 >= state.arr1.length) {
                 return {
                     ...state,
                     it: 0,
-                    text1: action.arr1[0][1],
-                    text2: action.arr1[0][0],
+                    text1: state.arr1[0][1],
+                    text2: state.arr1[0][0],
                     textInput: "",
                     data: 0,
                     data2: 0,
@@ -151,12 +200,12 @@ export function reducer(state, action) {
                 }
             }
 
-            voice(action.arr1[state.it + 1][0], action.arr1[state.it + 1][1])
+            voice(state.arr1[state.it + 1][0], state.arr1[state.it + 1][1])
             return {
                 ...state,
                 it: state.it + 1,
-                text1: action.arr1[state.it + 1][1],
-                text2: action.arr1[state.it + 1][0],
+                text1: state.arr1[state.it + 1][1],
+                text2: state.arr1[state.it + 1][0],
                 textInput: "",
                 data: 0,
                 data2: 0,
@@ -172,17 +221,14 @@ export function reducer(state, action) {
                 let avgTime = Math.round(action.data2 / (state.right + 1))
 
 
-                if (state.text2.length === 1) { // end lines
+                // end lines
+                if (state.text2.length === 1) {
 
                     if (action.res.get(state.it + 1) !== undefined) { // set new record
-
                         if (action.res.get(state.it + 1)[1] > avgTime) { // new record
                             action.res.set(state.it + 1, [avgTime + "ms](" +
                             Math.round(60000 / avgTime) + "in minute)allTime-" + action.data2, avgTime])
                         }
-
-
-
                     } else {
 
                         action.res.set(state.it + 1, [avgTime + "ms](" +
@@ -191,21 +237,22 @@ export function reducer(state, action) {
                     }
 
 
-                    if (state.check1) { // cycle active
-                        if (state.count1 === state.count0){
+                    // cycle active
+                    if (state.check1) {
+                        if (state.count1 === state.count0) {
                             state.time99 = []
                         }
 
                         state.time99.push(avgTime)
 
 
-                        if (state.count1 <= 1){ // cycle end
+                        if (state.count1 <= 1) { // cycle end
                             return endDictionary();
-                        }else {
+                        } else {
 
 
-                            if (state.voiceCycle){
-                                voice( action.arr1[state.it][0], action.arr1[state.it ][1])
+                            if (state.voiceCycle) {
+                                voice(action.arr1[state.it][0], action.arr1[state.it][1])
                             }
 
                             return { // cycle count next
@@ -223,11 +270,10 @@ export function reducer(state, action) {
                         }
                     }
 
+
                     return endDictionary();
 
                 } else { // no end lines
-
-
 
                     return { //right next
                         ...state,
@@ -241,15 +287,15 @@ export function reducer(state, action) {
                     }
                 }
 
-            } else {//error
-
+                //error
+            } else {
 
 
                 if (state.check2) { // error // start
                     return {
                         ...state,
-                        text1: action.arr1[state.it][1],
-                        text2: action.arr1[state.it][0],
+                        text1: state.arr1[state.it][1],
+                        text2: state.arr1[state.it][0],
                         textInput: "",
                         data: 0,
                         data2: 0,
@@ -258,7 +304,7 @@ export function reducer(state, action) {
                         wrong: 0,
                         wrong2: true
                     }
-                }else {
+                } else {
 
                     return { // error
                         ...state,
@@ -268,7 +314,9 @@ export function reducer(state, action) {
 
                     }
                 }
-            }
+
+            }//--
+
 
         default:
             throw new Error();

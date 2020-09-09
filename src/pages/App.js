@@ -1,19 +1,34 @@
 import React, {useEffect, useReducer, useState} from 'react';
 import setColor1 from "../util/color";
 import {reducer} from "../util/reducer";
-import {word1} from "../data1/word";
+
+
+import * as css1 from "../data1/css1";
+import * as dictionary1 from "../data1/dictionary1";
+import * as dictionary2 from "../data1/dictionary2";
+import * as j1 from "../data1/j1";
+import * as sql from "../data1/sql";
+import * as word from "../data1/word";
 
 import {Menu1} from "../components/menu";
 import {Keyboard} from "../components/keyboard";
 
 let next2 = false;
-let arr1 = word1;
+
 const res = new Map()
+
+let arr98 = {...j1,...sql, ...word, ...css1, ...dictionary1, ...dictionary2}
+let arr99 = Object
+    .keys(arr98)
+    .map((key, index) => {
+    return (arr98[key]);
+});
+
 
 const initialState = {
     it: 0,
-    text1: arr1[0][1],
-    text2: arr1[0][0],
+    text1: arr99[16][0][1],
+    text2: arr99[16][0][0],
     textInput: "",
     data: 0,
     data2: 0,
@@ -31,7 +46,12 @@ const initialState = {
     voiceCycle: false,
     nameData: "word1",
     rateVoice: 5,
-    styleKeyboard2: true
+    styleKeyboard2: true,
+    arr99,
+    allDictionary: true,
+    currentArr: 16,
+    arr1: arr99[16]
+
 };
 
 
@@ -62,7 +82,7 @@ export function App() {
                 }
             } else {
                 if (event.keyCode === 90 && next2) {
-                    dispatch({type: 'nextHandler', arr1: arr1})
+                    dispatch({type: 'nextHandler'})
                     next2 = false
                     return;
                 } else if (event.keyCode === 88 && next2) {
@@ -90,8 +110,6 @@ export function App() {
                     key: event.key,
                     data: new Date().getTime(),
                     data2: 0,
-
-                    arr1: arr1,
                     res
                 })
             } else {
@@ -101,7 +119,7 @@ export function App() {
                     key: event.key,
                     data: state.data, // time start
                     data2: allTime, // all time
-                    arr1: arr1,
+
                     res
 
                 })
@@ -114,19 +132,16 @@ export function App() {
         };
     }, [state]);
 
-    function setData(d) {
-        arr1 = d;
-    }
 
-    function startHandler(e, nameData = "") {
+    function startHandler(e, nameData = "", d = null, index) {
         res.clear();
-        dispatch({type: 'startHandler', arr1, nameData})
+        dispatch({type: 'startHandler',  nameData, index})
         refBtnStart.current.focus();
         refBtnStart.current.blur()
     }
 
     function nextHandler() {
-        dispatch({type: 'nextHandler', arr1})
+        dispatch({type: 'nextHandler'})
         refBtnNext.current.blur()
     }
 
@@ -228,6 +243,10 @@ export function App() {
         refBtnStart.current.blur()
     }
 
+    function allDictionaryHandler(e) {
+        dispatch({type: 'allDictionary1'});
+        noFocus();
+    }
 
 
 ////////////////////////render/////////////////////////////////////////////////////////////
@@ -251,7 +270,7 @@ export function App() {
                 flexDirection: "row",
                 justifyContent: "space-evenly"
             }}>
-                <Menu1 startHandler={startHandler} setData={setData}/>
+                <Menu1 startHandler={startHandler} arr99={arr98}/>
 
                 <div style={{
                     paddingLeft: '2px',
@@ -263,7 +282,7 @@ export function App() {
                     <div>
                         Trainer {state.nameData}
                     </div>
-                    <div>{arr1.length}/{state.it + 1}
+                    <div>{state.arr1.length}/{state.it + 1}
                         <label style={{
                             margin: '0 25px'
                         }}
@@ -313,6 +332,13 @@ export function App() {
                             checked={state.voiceCycle}
                             title="voice cycle"
                         />cycle</label>
+
+                        <label><input
+                            type="checkbox"
+                            onChange={allDictionaryHandler}
+                            checked={state.allDictionary}
+                            title="all dictionary"
+                        />all dictionary</label>
 
                         <br/>
                         <input
@@ -388,11 +414,14 @@ export function App() {
 
                     <div style={styleText1}>
                         {
-                            arr1.map((text, index) =>
+                            state.arr1.map((text, index) =>
                                 <p key={index} value={text}> {index + 1} = {text}</p>)
                         }
                     </div>
                 </div>
+
+
+
 
 
                 <div style={{
@@ -437,7 +466,7 @@ export function App() {
                             .from(res).reverse()
                             .map(function (o, index) {
                                 return <i key={index} value={o}
-                                          style={setColor1(o[1][1])}>{arr1[o[0] - 1][0].slice(0, 14)} [{o[1][0]}
+                                          style={setColor1(o[1][1])}>{state.arr1[o[0] - 1][0].slice(0, 14)} [{o[1][0]}
                                     <br/></i>
                             })}
 
