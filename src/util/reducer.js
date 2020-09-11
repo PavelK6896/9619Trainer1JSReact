@@ -261,13 +261,13 @@ export function reducer(state, action) {
 
 
                             if (state.voiceCycle) {
-                                voice(action.arr1[state.it][0], action.arr1[state.it][1])
+                                voice(state.arr1[state.it][0], state.arr1[state.it][1])
                             }
 
                             return { // cycle count next
                                 ...state,
-                                text1: action.arr1[state.it][1],
-                                text2: action.arr1[state.it][0],
+                                text1: state.arr1[state.it][1],
+                                text2: state.arr1[state.it][0],
                                 textInput: "",
                                 data: 0,
                                 data2: 0,

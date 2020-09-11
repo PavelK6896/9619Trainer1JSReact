@@ -3,33 +3,32 @@ import {useGlobalContext} from "../../global";
 
 export const Top = () => {
 
-    const {state, check1Handler, count1Handler, check2Handler,
-        en1Handler, ru1Handler, voiceCycle1Handler, allDictionaryHandler, rateVoice1Handler} = useGlobalContext()
+    const {
+        state, check1Handler, count1Handler, check2Handler,
+        en1Handler, ru1Handler, voiceCycle1Handler, allDictionaryHandler, rateVoice1Handler
+    } = useGlobalContext()
 
 
     return (<div>
 
         <div>
-            Trainer {state.nameData} {state.userLang}
+            Trainer {state.nameData} {state.userLang} {state.arr1.length}/{state.it + 1}
         </div>
-        <div>{state.arr1.length}/{state.it + 1}
+        <div>
             <label style={{
-                margin: '0 25px'
+                margin: '2px'
             }}
-            >
-                {state.count1}
-                <input
-                    type="checkbox"
-                    onChange={check1Handler}
-                    checked={state.check1}
-                />
-                cycle (ctrl + x)
+            > <input
+                type="checkbox"
+                onChange={check1Handler}
+                checked={state.check1}
+            />
                 <input
                     style={{width: '30px'}}
                     type="number"
                     defaultValue={state.count1}
                     onChange={count1Handler}
-                />
+                />cycle (ctrl + x)
 
             </label>
 

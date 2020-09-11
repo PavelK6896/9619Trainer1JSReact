@@ -13,7 +13,7 @@ import * as word from "../data1/word";
 const res = new Map()
 let next2 = true
 
-let arr98 = {...j1, ...sql, ...word, ...css1, ...dictionary1, ...dictionary2}
+let arr98 = {...css1, ...j1, ...sql, ...word, ...dictionary1, ...dictionary2}
 let arr99 = Object
     .keys(arr98)
     .map((key, index) => {
@@ -32,15 +32,15 @@ export const useGlobalContext = () => {
 
 const initialState = {
     it: 0,
-    text1: arr99[16][0][1],
-    text2: arr99[16][0][0],
+    text1: arr99[3][0][1],
+    text2: arr99[3][0][0],
     textInput: "",
     data: 0,
     data2: 0,
     time1: 0,
     right: 0,
     wrong: 0,
-    check1: false,
+    check1: true,
     check2: true,
     time99: [],
     count1: 3,
@@ -48,15 +48,15 @@ const initialState = {
     wrong2: false,
     en: true,
     ru: true,
-    voiceCycle: false,
+    voiceCycle: true,
     nameData: "word1",
-    rateVoice: 5,
+    rateVoice: 10,
     styleKeyboard2: true,
     arr99,
     word99,
     allDictionary: true,
-    currentArr: 16,
-    arr1: arr99[16],
+    currentArr: 3,
+    arr1: arr99[3],
 };
 
 
