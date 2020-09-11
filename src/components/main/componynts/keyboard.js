@@ -1,8 +1,7 @@
 import React, {useEffect, useReducer, useState} from "react";
 
 
-let userLang = navigator.language
-console.log(userLang);
+
 
 const Russian = [ // Russian Standard Keyboard
     [["\u0451", "\u0401"], ["1", "!"], ["2", '"'], ["3", "\u2116"], ["4", ";"], ["5", "%"], ["6", ":"], ["7", "?"], ["8", "*"], ["9", "("], ["0", ")"], ["-", "_"], ["=", "+"], ["Bksp", "Bksp"]],
@@ -66,6 +65,22 @@ function reducer3(state, action) {
 
 let shift = false;
 
+// проверка языка
+// const rusLower = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+// const rusUpper = rusLower.toUpperCase()
+// const enLower = 'abcdefghijklmnopqrstuvwxyz'
+// const enUpper = enLower.toUpperCase()
+// const rus = rusLower + rusUpper
+// const en = enLower + enUpper
+//
+// let lang = ""
+// if (rus.includes(char)) {
+//     lang = 'ru'
+// } else if (en.includes(char)) {
+//     lang = 'en'
+// }
+//
+
 export const Keyboard = (props) => {
     const [uppercaseState, uppercaseDispatch] = useReducer(reducer3, init);
     const [state4, setState4] = useState(
@@ -74,10 +89,13 @@ export const Keyboard = (props) => {
         })
 
 
+
     useEffect(() => {
 
         if (props.style1.display === 'block') {
             const handleDown = (event) => {
+
+                console.log(event)
 
                 if (event.key === 'CapsLock') {
                     if ( event.getModifierState('CapsLock')){

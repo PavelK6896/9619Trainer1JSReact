@@ -249,9 +249,9 @@ export const java = [
 ]
 
 export const spring = [
+    ["@Bean", "3-@Боб"],
     ["@ComponentScan(\"com.\")", "1-"],
     ["@SpringBootApplication", "2-"],
-    ["@Bean", "3-@Боб"],
     ["@Component", "4-@Компонент"],
     ["@Controller", "4.1-"],
     ["@RestController", "4.2-"],
