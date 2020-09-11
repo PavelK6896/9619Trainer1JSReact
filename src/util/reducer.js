@@ -15,8 +15,8 @@ export function reducer(state, action) {
 
     function endDictionary() {
         if (state.it + 1 >= state.arr1.length) {
-            if (state.allDictionary) {
-                if (state.arr99.length > state.currentArr) {
+            if (state.allDictionary) {//
+                if (state.arr99.length > state.currentArr) {//следующий словарь
                     voice(state.arr99[state.currentArr + 1][0][0], state.arr99[state.currentArr + 1][0][1])
                     return {
                         ...state,
@@ -33,9 +33,12 @@ export function reducer(state, action) {
                         //  time99: [],
                         count1: 0,
                         currentArr: state.currentArr + 1,
+                        nameData: state.word99[state.currentArr + 1],
                     }
 
-                } else {
+                } else {//первый словарь
+
+
                     voice(state.arr99[state.currentArr][0][0], state.arr99[state.currentArr][0][1])
                     return {
                         ...state,
@@ -163,13 +166,19 @@ export function reducer(state, action) {
         case 'startHandler':
 
             voiceName()
-            voice(state.arr99[action.index][0][0], state.arr99[action.index][0][1])
+            let i = state.currentArr
+            if(action.index){
+                i = action.index
+                state.nameData = action.nameData
+            }
+
+             voice(state.arr99[i][0][0], state.arr99[i][0][1])
             return {
                 ...state,
                 it: 0,
-                text1: state.arr99[action.index][0][1],
-                text2: state.arr99[action.index][0][0],
-                arr1: state.arr99[action.index],
+                text1: state.arr99[i][0][1],
+                text2: state.arr99[i][0][0],
+                arr1: state.arr99[i],
                 textInput: "",
                 data: 0,
                 data2: 0,
@@ -178,8 +187,8 @@ export function reducer(state, action) {
                 wrong: 0,
                 time99: [],
                 count1: state.count0,
-                nameData: action.nameData,
-                currentArr: action.index,
+                nameData: state.nameData,
+                currentArr: i,
             }
 
         case 'nextHandler':

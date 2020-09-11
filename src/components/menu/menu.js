@@ -1,7 +1,8 @@
 import React from "react";
+import {useGlobalContext} from "../global";
 
-export const Menu1 = ({arr99, startHandler, setData}) => {
-    const word99 =  Object.keys(arr99);
+export const Menu1 = () => {
+    const {state, startHandler, word99} = useGlobalContext()
 
     return (<div style={{
             paddingLeft: '2px',
@@ -13,8 +14,8 @@ export const Menu1 = ({arr99, startHandler, setData}) => {
             flexDirection: "column",
         }}>
 
-            {
-                Object.values(arr99).map(
+            {//делает кнопки
+                Object.values(state.arr99).map(
                     function (o, index, arr) {
                         return (<button key={index} onClick={() => {
                             startHandler( "" ,word99[index], o, index);
