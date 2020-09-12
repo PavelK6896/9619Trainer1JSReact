@@ -167,10 +167,12 @@ export function reducer(state, action) {
 
             voiceName()
             let i = state.currentArr
-            if(action.index){
+            if(action.index !== undefined){
                 i = action.index
                 state.nameData = action.nameData
             }
+
+
 
              voice(state.arr99[i][0][0], state.arr99[i][0][1])
             return {

@@ -95,8 +95,6 @@ export const Keyboard = (props) => {
         if (props.style1.display === 'block') {
             const handleDown = (event) => {
 
-                console.log(event)
-
                 if (event.key === 'CapsLock') {
                     if ( event.getModifierState('CapsLock')){
                         if(!uppercaseState.CapsLock){
