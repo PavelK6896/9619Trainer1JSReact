@@ -10,7 +10,7 @@ import * as word from "../data1/word";
 
 
 
-const res = new Map()
+
 let next2 = true
 
 let arr98 = {...css1, ...j1, ...sql, ...word, ...dictionary1, ...dictionary2}
@@ -46,10 +46,10 @@ const initialState = {
     count1: 3,
     count0: 3,
     wrong2: false,
-    en: true,
-    ru: true,
+    en: false,
+    ru: false,
     voiceCycle: true,
-    nameData: "word1",
+    nameData: "",
     rateVoice: 10,
     styleKeyboard2: true,
     arr99,
@@ -57,6 +57,7 @@ const initialState = {
     allDictionary: true,
     currentArr: 3,
     arr1: arr99[3],
+    res: new Map()
 };
 
 
@@ -78,8 +79,8 @@ export const GlobalProvider = ({children}) => {
     }
 
     function startHandler(e, nameData = "", d = null, index) {
-        res.clear()
         dispatch({type: 'startHandler', nameData, index})
+        state.res.clear()
         noFocus()
     }
 
@@ -183,8 +184,8 @@ export const GlobalProvider = ({children}) => {
                     type: 'key',
                     key: event.key,
                     data: new Date().getTime(),
-                    data2: 0,
-                    res
+                    data2: 0
+
                 })
             } else {
                 const allTime = new Date().getTime() - state.data
@@ -193,8 +194,6 @@ export const GlobalProvider = ({children}) => {
                     key: event.key,
                     data: state.data, // time start
                     data2: allTime, // all time
-
-                    res
 
                 })
             }
@@ -223,8 +222,7 @@ export const GlobalProvider = ({children}) => {
             nextHandler,
             btnText1,
             btnKeyboard1,
-            state2,
-            res
+            state2
 
         }}>
             {children}

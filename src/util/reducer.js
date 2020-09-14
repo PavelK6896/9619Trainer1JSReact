@@ -14,7 +14,7 @@ export function reducer(state, action) {
     }
 
     function endDictionary() {
-        if (state.it + 1 >= state.arr1.length) {
+        if (state.it + 1 >= state.arr1.length) {//конец словаря
             if (state.allDictionary) {//
                 if (state.arr99.length > state.currentArr) {//следующий словарь
                     voice(state.arr99[state.currentArr + 1][0][0], state.arr99[state.currentArr + 1][0][1])
@@ -34,6 +34,7 @@ export function reducer(state, action) {
                         count1: 0,
                         currentArr: state.currentArr + 1,
                         nameData: state.word99[state.currentArr + 1],
+                        res: new Map()
                     }
 
                 } else {//первый словарь
@@ -55,6 +56,7 @@ export function reducer(state, action) {
                         //  time99: [],
                         count1: 0,
                         currentArr: state.currentArr,
+                        res: new Map()
                     }
                 }
 
@@ -235,14 +237,14 @@ export function reducer(state, action) {
                 // end lines
                 if (state.text2.length === 1) {
 
-                    if (action.res.get(state.it + 1) !== undefined) { // set new record
-                        if (action.res.get(state.it + 1)[1] > avgTime) { // new record
-                            action.res.set(state.it + 1, [avgTime + "ms](" +
+                    if (state.res.get(state.it + 1) !== undefined) { // set new record
+                        if (state.res.get(state.it + 1)[1] > avgTime) { // new record
+                            state.res.set(state.it + 1, [avgTime + "ms](" +
                             Math.round(60000 / avgTime) + "in minute)allTime-" + action.data2, avgTime])
                         }
                     } else {
 
-                        action.res.set(state.it + 1, [avgTime + "ms](" +
+                        state.res.set(state.it + 1, [avgTime + "ms](" +
                         Math.round(60000 / avgTime) + "in minute)allTime-" + action.data2, avgTime])
 
                     }
@@ -258,6 +260,7 @@ export function reducer(state, action) {
 
 
                         if (state.count1 <= 1) { // cycle end
+
                             return endDictionary();
                         } else {
 

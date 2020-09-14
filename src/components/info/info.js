@@ -4,7 +4,7 @@ import {useGlobalContext} from "../global";
 
 export const Info = () => {
 
-    const {state, res} = useGlobalContext()
+    const {state} = useGlobalContext()
 
     return (<div>
 
@@ -47,10 +47,19 @@ export const Info = () => {
                 </div>
 
                 {Array
-                    .from(res).reverse()//результат
+                    .from(state.res).reverse()//результат
                     .map(function (o, index) {
+
+                        if (state.arr1[(o[0] - 1)] === undefined){
+                            return
+                        }
+
                         return <i key={index} value={o}
-                                  style={setColor1(o[1][1])}>{state.arr1[o[0] - 1][0].slice(0, 14)} [{o[1][0]}
+                                  style={setColor1(o[1][1])}>
+
+                            {state.arr1[(o[0] - 1)][0].slice(0, 14)}
+
+                            [{o[1][0]}
                             <br/></i>
                     })}
 
