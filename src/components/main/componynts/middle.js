@@ -20,22 +20,29 @@ export const Middle = () => {
 
 
         <div style={{
+
             backgroundColor: '#ececec',
             fontSize: '25px',
             marginTop: '25px'
         }}
         >{state.text1}</div>
 
-        <pre style={{
+        <p style={{
 
             ...styleMain1,
             display: 'flex',
+
+            flexWrap: "wrap",
             backgroundColor: 'rgba(136,136,136,0.64)',
             fontSize: '35px',
+            minWidth: "50px",
+            lineHeight: "45px",
+            fontFamily: "Helvetica",
+            letterSpacing: "0.07em",
 
             justifyContent: "center"
 
-        }}>{state.text2}</pre>
+        }}>{state.text2}</p>
 
 
         <div style={{

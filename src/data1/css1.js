@@ -1,6 +1,6 @@
 export const css = [
-  ["@media (min-width: 300px) and (max-width: 500px){.header{background-color: orange;}}",
-    "@медиа (минута-ширина: 300px) и (максимум-ширина: 500px){.заголовок{фон-цвет: оранжевый;}}"],
+  // ["@media (min-width: 300px) and (max-width: 500px){.header{background-color: orange;}}",
+  //   "@медиа (минута-ширина: 300px) и (максимум-ширина: 500px){.заголовок{фон-цвет: оранжевый;}}"],
   ["transition:all 0.2s;","",""],
   ["white-space: nowrap;",""],
   ["font-style: normal;",""],
