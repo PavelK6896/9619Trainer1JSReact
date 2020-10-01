@@ -3,7 +3,7 @@ import React from 'react';
 import {Menu1} from "../components/menu/menu";
 import {Footer} from "../components/footer";
 
-import {GlobalProvider} from "../components/global";
+import {GlobalProvider} from "../store/global";
 import {Main} from "../components/main/main";
 import {Info} from "../components/info/info";
 

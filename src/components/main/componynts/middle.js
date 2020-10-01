@@ -1,5 +1,5 @@
 import React from "react";
-import {useGlobalContext} from "../../global";
+import {useGlobalContext} from "../../../store/global";
 
 export const Middle = () => {
 

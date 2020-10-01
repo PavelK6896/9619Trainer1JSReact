@@ -1,10 +1,10 @@
 import React from "react";
 import {Keyboard} from "./keyboard";
-import {useGlobalContext} from "../../global";
+import {useGlobalContext} from "../../../store/global";
 
 export const Bottom = () => {
 
-    const {state, startHandler, refBtnStart, nextHandler, btnText1, btnKeyboard1 ,state2} = useGlobalContext()
+    const {state, startHandler, refBtnStart, nextHandler, btnText1, btnKeyboard1, state2} = useGlobalContext()
 
     let styleKeyboard1;
     let styleText1;
@@ -46,7 +46,7 @@ export const Bottom = () => {
 
         <div>
             <button onClick={startHandler} ref={refBtnStart}>сначало</button>
-            <button onClick={nextHandler} >next (ctrl + z)</button>
+            <button onClick={nextHandler}>next (ctrl + z)</button>
             <button onClick={btnText1}>Text</button>
             <button onClick={btnKeyboard1}>Keyboard</button>
         </div>
@@ -59,8 +59,10 @@ export const Bottom = () => {
 
         <div style={styleText1}>
             {
-                state.arr1.map((text, index) =>
-                    <p key={index} value={text}> {index + 1} = {text}</p>)
+                state.arr1.map((text, index) => {
+                    return (<p key={index} value={text}><i>({index + 1})</i> <b>{text[0]}</b>&nbsp;-&nbsp;{text[1]}</p>)
+                    }
+                )
             }
         </div>
 

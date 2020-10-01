@@ -1,6 +1,6 @@
 import React from "react";
 import setColor1 from "../../util/color";
-import {useGlobalContext} from "../global";
+import {useGlobalContext} from "../../store/global";
 
 export const Info = () => {
 

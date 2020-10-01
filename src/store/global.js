@@ -6,14 +6,37 @@ import * as dictionary1 from "../data1/dictionary1";
 import * as dictionary2 from "../data1/dictionary2";
 import * as j1 from "../data1/j1";
 import * as sql from "../data1/sql";
+import * as sqlPostgres1 from "../data1/sql1";
+import * as sql2 from "../data1/sql2";
 import * as word from "../data1/word";
-
-
-
 
 let next2 = true
 
-let arr98 = {...css1, ...j1, ...sql, ...word, ...dictionary1, ...dictionary2}
+// чтение sql1 из файла
+const sql0 = []
+Object.values(sql).map((k,i) => {
+    k.map((k1,i1) => {
+        k1[0] = k1[0].toLowerCase()
+    })
+    sql0.push(...k)
+})
+
+const sql1 = []
+Object.values(sqlPostgres1).map((k,i) => {
+    k.map((k1,i1) => {
+        k1[0] = k1[0].toLowerCase()
+    })
+    sql1.push(...k)
+})
+
+
+
+
+
+
+
+let arr98 = {...css1, ...j1, sql0, sql1, ...sql2, ...word, ...dictionary1, ...dictionary2}
+
 let arr99 = Object
     .keys(arr98)
     .map((key, index) => {
@@ -43,15 +66,15 @@ const initialState = {
     check1: true,
     check2: true,
     time99: [],
-    count1: 3,
-    count0: 3,
+    count1: 1,
+    count0: 1,
     wrong2: false,
     en: false,
     ru: false,
     voiceCycle: true,
     nameData: "",
     rateVoice: 10,
-    styleKeyboard2: true,
+    styleKeyboard2: false,
     arr99,
     word99,
     allDictionary: true,
