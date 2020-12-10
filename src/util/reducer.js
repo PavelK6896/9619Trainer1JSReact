@@ -101,10 +101,13 @@ export function reducer(state, action) {
 
     }//--
 
-
     switch (action.type) {
 
-
+        case 'styleSetting2':
+            return {
+                ...state,
+                styleSetting2: !state.styleSetting2,
+            }
         case 'styleKeyboard2':
             return {
                 ...state,
@@ -130,7 +133,6 @@ export function reducer(state, action) {
                 count1: action.count,
                 count0: action.count
             }
-
 
         case 'ru1':
             return {
@@ -169,14 +171,13 @@ export function reducer(state, action) {
 
             voiceName()
             let i = state.currentArr
-            if(action.index !== undefined){
+            if (action.index !== undefined) {
                 i = action.index
                 state.nameData = action.nameData
             }
 
 
-
-             voice(state.arr99[i][0][0], state.arr99[i][0][1])
+            voice(state.arr99[i][0][0], state.arr99[i][0][1])
             return {
                 ...state,
                 it: 0,
@@ -248,7 +249,6 @@ export function reducer(state, action) {
                         Math.round(60000 / avgTime) + "in minute)allTime-" + action.data2, avgTime])
 
                     }
-
 
                     // cycle active
                     if (state.check1) {
@@ -328,9 +328,7 @@ export function reducer(state, action) {
 
                     }
                 }
-
             }//--
-
 
         default:
             throw new Error();

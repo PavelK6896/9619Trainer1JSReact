@@ -29,12 +29,6 @@ Object.values(sqlPostgres1).map((k,i) => {
     sql1.push(...k)
 })
 
-
-
-
-
-
-
 let arr98 = {...css1, ...j1, sql0, sql1, ...sql2, ...word, ...dictionary1, ...dictionary2}
 
 let arr99 = Object
@@ -50,8 +44,6 @@ const GlobalContext = React.createContext()
 export const useGlobalContext = () => {
     return useContext(GlobalContext)
 }
-
-
 
 const initialState = {
     it: 0,
@@ -75,6 +67,7 @@ const initialState = {
     nameData: "",
     rateVoice: 10,
     styleKeyboard2: false,
+    styleSetting2: false,
     arr99,
     word99,
     allDictionary: true,
@@ -82,7 +75,6 @@ const initialState = {
     arr1: arr99[3],
     res: new Map()
 };
-
 
 export const GlobalProvider = ({children}) => {
 
@@ -93,8 +85,6 @@ export const GlobalProvider = ({children}) => {
             vis: false,
             key1: "",
         })
-
-
 
     function noFocus() {
         refBtnStart.current.focus()
@@ -166,7 +156,10 @@ export const GlobalProvider = ({children}) => {
         noFocus();
     }
 
-
+    function btnSetting1() {
+        dispatch({type: 'styleSetting2'});
+        noFocus();
+    }
 
     useEffect(() => {
         const handle = (event) => {
@@ -245,12 +238,11 @@ export const GlobalProvider = ({children}) => {
             nextHandler,
             btnText1,
             btnKeyboard1,
+            btnSetting1,
             state2
 
         }}>
             {children}
         </GlobalContext.Provider>
     )
-
-
 }
