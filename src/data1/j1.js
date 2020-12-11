@@ -682,7 +682,7 @@ export const bootsRap4 = [
 
 ]
 
-const cSh = [
+export const cSh = [
 
     ["abstract", "Аннотация"],
     ["as", "в качестве"],

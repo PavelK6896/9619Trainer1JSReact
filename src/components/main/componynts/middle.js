@@ -24,6 +24,7 @@ export const Middle = () => {
             backgroundColor: '#ececec',
             fontSize: '25px',
             marginTop: '25px'
+
         }}
         >{state.text1}</div>
 
