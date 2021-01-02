@@ -4,11 +4,13 @@ import {reducer} from "../util/reducer";
 import * as css1 from "../data1/css1";
 import * as dictionary1 from "../data1/dictionary1";
 import * as dictionary2 from "../data1/dictionary2";
+import * as dictionary3 from "../data1/dictionary3";
 import * as j1 from "../data1/j1";
 import * as sql from "../data1/sql";
 import * as sqlPostgres1 from "../data1/sql1";
 import * as sql2 from "../data1/sql2";
 import * as word from "../data1/word";
+
 
 let next2 = true
 
@@ -29,7 +31,7 @@ Object.values(sqlPostgres1).map((k,i) => {
     sql1.push(...k)
 })
 
-let arr98 = {...css1, ...j1, sql0, sql1, ...sql2, ...word, ...dictionary1, ...dictionary2}
+let arr98 = {...css1, ...j1, sql0, sql1, ...sql2, ...word, ...dictionary1, ...dictionary2, ...dictionary3}
 
 let arr99 = Object
     .keys(arr98)

@@ -1,9 +1,9 @@
-const message1 = new SpeechSynthesisUtterance();
-message1.lang = "en-US";
+const engine1 = new SpeechSynthesisUtterance();
+engine1.lang = "en-US";
 
 let voice1
-const message2 = new SpeechSynthesisUtterance();
-message2.lang = "ru";
+const engine2 = new SpeechSynthesisUtterance();
+engine2.lang = "ru";
 
 export const voiceName = () => {
     const v1 = 'IVONA 2 Kimberly OEM'
@@ -13,10 +13,10 @@ export const voiceName = () => {
 
     voice1.forEach(o => {
         if (o.name === v2) {
-            message2.voice = o
+            engine2.voice = o
         }
         if (o.name === v1) {
-            message1.voice = o
+            engine1.voice = o
         }
     })
 
@@ -26,20 +26,20 @@ export const voiceEn = (TwoSpeech, textEN, textRU, rateVoice) => {
     //  добавить иф
     window.speechSynthesis.cancel()
 
-    message1.volume = 0.5
-    message1.rate = rateVoice;
-    message2.volume = 0.5
-    message2.rate = rateVoice
+    engine1.volume = 0.5
+    engine1.rate = rateVoice;
+    engine2.volume = 0.5
+    engine2.rate = rateVoice
 
     if (textEN != null) {
-        message1.text = textEN
-        window.speechSynthesis.speak(message1);
+        engine1.text = textEN
+        window.speechSynthesis.speak(engine1);
         // console.log("voiceEn ", textEN)
     }
     if (textRU != null) {
-        message2.text = textRU
+        engine2.text = textRU
 
-        window.speechSynthesis.speak(message2);
+        window.speechSynthesis.speak(engine2);
         // console.log("voiceRu ", textRU)
     }
 
