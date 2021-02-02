@@ -1,4 +1,4 @@
-import React, {useContext, useReducer, useState, useEffect} from "react";
+import React, {useContext, useEffect, useReducer, useState} from "react";
 import {reducer} from "../util/reducer";
 
 import * as css1 from "../data1/css1";
@@ -66,10 +66,11 @@ const initialState = {
     en: false,
     ru: false,
     voiceCycle: true,
-    nameData: "",
+    nameData: "java",
     rateVoice: 10,
     styleKeyboard2: false,
     styleSetting2: false,
+    styleVisibleInfo2: false,
     arr99,
     word99,
     allDictionary: true,
@@ -163,6 +164,12 @@ export const GlobalProvider = ({children}) => {
         noFocus();
     }
 
+    function btnVisibleInfo1() {
+        dispatch({type: 'styleVisibleInfo2'});
+        noFocus();
+    }
+
+
     useEffect(() => {
         const handle = (event) => {
             setState2({...state2, key1: event.key});
@@ -241,6 +248,7 @@ export const GlobalProvider = ({children}) => {
             btnText1,
             btnKeyboard1,
             btnSetting1,
+            btnVisibleInfo1,
             state2
 
         }}>

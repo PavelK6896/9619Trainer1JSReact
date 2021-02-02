@@ -103,11 +103,18 @@ export function reducer(state, action) {
 
     switch (action.type) {
 
+        case 'styleVisibleInfo2':
+            return {
+                ...state,
+                styleVisibleInfo2: !state.styleVisibleInfo2,
+            }
+
         case 'styleSetting2':
             return {
                 ...state,
                 styleSetting2: !state.styleSetting2,
             }
+
         case 'styleKeyboard2':
             return {
                 ...state,

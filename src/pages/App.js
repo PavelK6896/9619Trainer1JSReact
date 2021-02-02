@@ -1,11 +1,12 @@
 import React from 'react';
 
 import {Menu1} from "../components/menu/menu";
-import {Footer} from "../components/footer";
+import {Footer} from "../components/Footer";
 
 import {GlobalProvider} from "../store/global";
 import {Main} from "../components/main/main";
 import {Info} from "../components/info/info";
+import {Header} from "../components/Header";
 
 
 export function App() {
@@ -22,14 +23,15 @@ export function App() {
                 display: "flex",
                 flexDirection: "column",
             }}>
+                <Header/>
                 {/*wrapper*/}
                 <div style={{
                     flexGrow: 1,
                     display: 'flex',
                     flexDirection: "row",
-                    justifyContent: "space-evenly"
                 }}>
-                    <Menu1/>
+
+                <Menu1/>
                     <Main/>
                     <Info/>
 
