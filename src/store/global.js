@@ -39,13 +39,15 @@ let arr99 = Object
         return (arr98[key]);
     });
 
-const word99 =  Object.keys(arr98);
+const word99 = Object.keys(arr98);
 
 const GlobalContext = React.createContext()
 
 export const useGlobalContext = () => {
     return useContext(GlobalContext)
 }
+
+let info1Ru = "Пожалуйста, смени раскладку клавиатуры на English."
 
 const initialState = {
     it: 0,
@@ -76,7 +78,9 @@ const initialState = {
     allDictionary: true,
     currentArr: 3,
     arr1: arr99[3],
-    res: new Map()
+    res: new Map(),
+    info1: "",
+    avg1: []
 };
 
 export const GlobalProvider = ({children}) => {
@@ -172,8 +176,23 @@ export const GlobalProvider = ({children}) => {
 
     useEffect(() => {
         const handle = (event) => {
-            setState2({...state2, key1: event.key});
 
+            // const enL = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            // if (enL.includes(event.key)) {
+            //     dispatch({type: 'info1', info1: "поменяйте раскладку на en"});
+            // }
+            const rusL = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
+            if (rusL.includes(event.key)) {
+                if (state.info1 !== info1Ru) {
+                    dispatch({type: 'info1', info1: info1Ru});
+                }
+            } else {
+                if (state.info1 !== "") {
+                    dispatch({type: 'info1', info1: ""});
+                }
+            }
+
+            setState2({...state2, key1: event.key});
             if (event.keyCode === 17) {
                 if (next2) {
                     next2 = false

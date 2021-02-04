@@ -103,6 +103,12 @@ export function reducer(state, action) {
 
     switch (action.type) {
 
+        case 'info1':
+            return {
+                ...state,
+                info1: action.info1
+            }
+
         case 'styleVisibleInfo2':
             return {
                 ...state,
@@ -241,19 +247,22 @@ export function reducer(state, action) {
             if (state.text2[0] === action.key) { // right
                 let avgTime = Math.round(action.data2 / (state.right + 1))
 
-
                 // end lines
                 if (state.text2.length === 1) {
 
+                    let inMinute = Math.round(60000 / avgTime);
+                    state.avg1.push(avgTime)
+
                     if (state.res.get(state.it + 1) !== undefined) { // set new record
                         if (state.res.get(state.it + 1)[1] > avgTime) { // new record
+
                             state.res.set(state.it + 1, [avgTime + "ms](" +
-                            Math.round(60000 / avgTime) + "in minute)allTime-" + action.data2, avgTime])
+                            inMinute + "in minute)allTime-" + action.data2, avgTime])
                         }
                     } else {
 
                         state.res.set(state.it + 1, [avgTime + "ms](" +
-                        Math.round(60000 / avgTime) + "in minute)allTime-" + action.data2, avgTime])
+                        inMinute + "in minute)allTime-" + action.data2, avgTime])
 
                     }
 

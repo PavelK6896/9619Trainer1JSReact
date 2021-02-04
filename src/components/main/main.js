@@ -102,12 +102,12 @@ export const Main = () => {
                         width: state5.widthDynamic - 2 + "px",
                         height: state5.heightDynamic - 2 + "px",
                         cursor: "default",
-                        overflow: "auto",
+                        overflowY: "auto",
                     }}
                 >
-                    <Top></Top>
-                    <Middle></Middle>
-                    <Bottom></Bottom>
+                    <Top/>
+                    <Middle/>
+                    <Bottom/>
 
                 </div>
             </div>

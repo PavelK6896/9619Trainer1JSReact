@@ -20,7 +20,7 @@ export const Info = () => {
         const mm = (event) => {
             if (menuState1.clickSizeX) {
                 let xx = (event.clientX - menuState1.posX)
-                if (menuState1.widthDynamic === undefined || menuState1.widthDynamic === NaN) {
+                if (menuState1.widthDynamic === undefined || isNaN(menuState1.widthDynamic)) {
                     menuState1.widthDynamic = menuState1.posX
                 }
                 setMenuState1({
@@ -30,7 +30,7 @@ export const Info = () => {
                 })
             } else if (menuState1.clickSizeY) {
                 let yy = (event.clientY - menuState1.posY)
-                if (menuState1.heightDynamic === undefined || menuState1.heightDynamic === NaN) {
+                if (menuState1.heightDynamic === undefined || isNaN(menuState1.heightDynamic)) {
                     menuState1.heightDynamic = menuState1.posY
                 }
                 setMenuState1({
@@ -74,6 +74,7 @@ export const Info = () => {
         }
     }
 
+    let avg2 = Math.round((state.avg1.reduce((a, b) => a + b, 0) / state.avg1.length))
 
     return (
 
@@ -131,6 +132,12 @@ export const Info = () => {
                         <div>
                             Trainer
                         </div>
+                        <div>
+                            {
+                                avg2 ? avg2 : ''
+                            }
+                            &nbsp;avg ms
+                        </div>
                         <button onClick={btnVisibleInfo1}
                         >Info
                         </button>
@@ -148,6 +155,8 @@ export const Info = () => {
                                 <p>1000ms это 1 нажатие в секунду это 60 знаков в минуту.</p>
                                 <p>500ms это 2 нажатий в секунду это 120 знаков в минуту.</p>
                                 <p>250ms это 4 нажатий в секунду это 240 знаков в минуту.</p>
+                                <p>200ms это 5 нажатий в секунду это 300 знаков в минуту.</p>
+                                <p>150ms это 6,7 нажатий в секунду это 400 знаков в минуту.</p>
                                 <p>100ms это 10 нажатий в секунду это 600 знаков в минуту.</p>
 
                             </div>

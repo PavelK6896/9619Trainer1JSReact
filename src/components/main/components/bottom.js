@@ -4,7 +4,7 @@ import {useGlobalContext} from "../../../store/global";
 
 export const Bottom = () => {
 
-    const {state, startHandler, refBtnStart, nextHandler, btnText1, btnKeyboard1, state2} = useGlobalContext()
+    const {state, startHandler, nextHandler, btnText1, btnKeyboard1, state2} = useGlobalContext()
 
     let styleKeyboard1;
     let styleText1;
@@ -45,7 +45,7 @@ export const Bottom = () => {
 
 
         <div>
-            <button onClick={startHandler} ref={refBtnStart}>сначало</button>
+            <button onClick={startHandler}>сначало</button>
             <button onClick={nextHandler}>next (ctrl + z)</button>
             <button onClick={btnText1}>Text</button>
             <button onClick={btnKeyboard1}>Keyboard</button>
