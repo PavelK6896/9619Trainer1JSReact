@@ -31,7 +31,7 @@ Object.values(sqlPostgres1).map((k,i) => {
     sql1.push(...k)
 })
 
-let arr98 = {...css1, ...j1, sql0, sql1, ...sql2, ...word, ...dictionary1, ...dictionary2, ...dictionary3}
+let arr98 = {...j1, ...css1, sql0, sql1, ...sql2, ...word, ...dictionary1, ...dictionary2, ...dictionary3}
 
 let arr99 = Object
     .keys(arr98)

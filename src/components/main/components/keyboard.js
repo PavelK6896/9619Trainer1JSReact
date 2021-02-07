@@ -1,4 +1,5 @@
 import React, {useEffect, useReducer, useState} from "react";
+import {useGlobalContext} from "../../../store/global";
 
 
 const Russian = [ // Russian Standard Keyboard
@@ -81,9 +82,11 @@ let shift = false;
 
 export const Keyboard = (props) => {
     const [uppercaseState, uppercaseDispatch] = useReducer(reducer3, init);
+    const {state} = useGlobalContext()
     const [state4, setState4] = useState(
         {
-            key11: ""
+            key11: "",
+            checkNow: false
         })
 
 
@@ -181,12 +184,22 @@ export const Keyboard = (props) => {
                                     border: "1px solid #555",
                                 }
 
-                                if (state4.key11 === value1[+uppercaseState.uppercase]) {
-                                    s = {
-                                        border: "1px solid #555",
-                                        backgroundColor: 'rgba(62,51,151,0.64)',
+                                if (state4.checkNow) {
+                                    if (state4.key11 === value1[+uppercaseState.uppercase]) {
+                                        s = {
+                                            border: "1px solid #555",
+                                            backgroundColor: 'rgba(62,51,151,0.64)',
+                                        }
+                                    }
+                                } else {
+                                    if (state.text2[0] === value1[+uppercaseState.uppercase]) {
+                                        s = {
+                                            border: "1px solid #555",
+                                            backgroundColor: 'rgba(62,51,151,0.64)',
+                                        }
                                     }
                                 }
+
 
                                 if (" " === value1[+uppercaseState.uppercase]) {
                                     s.width = '100px'

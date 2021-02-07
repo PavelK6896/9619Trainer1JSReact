@@ -1,14 +1,11 @@
 import React from "react";
-import {Keyboard} from "./keyboard";
 import {useGlobalContext} from "../../../store/global";
 
 export const Bottom = () => {
 
-    const {state, startHandler, nextHandler, btnText1, btnKeyboard1, state2} = useGlobalContext()
+    const {state, startHandler, nextHandler, btnText1, state2} = useGlobalContext()
 
-    let styleKeyboard1;
     let styleText1;
-
     if (state2.vis) {
         styleText1 = {
             border: '2px solid #555',
@@ -26,35 +23,36 @@ export const Bottom = () => {
     }
 
 
-    if (state.styleKeyboard2) {
-        styleKeyboard1 = {
-            display: 'block',
-        }
-    } else {
-        styleKeyboard1 = {
-            display: 'none',
-        }
-    }
 
     return (<div>
 
-        <div>
-            <div>allTime {state.data2} ms</div>
+        <div
+            style={{
+                textAlign: 'center',
+            }}
+        >
             Неправильно: {state.wrong} Правильно: {state.right} Осталось: {state.text2.length}
         </div>
 
 
-        <div>
+        <div
+            style={{
+                textAlign: 'center',
+            }}
+        >
             <button onClick={startHandler}>сначало</button>
             <button onClick={nextHandler}>next (ctrl + z)</button>
             <button onClick={btnText1}>Text</button>
-            <button onClick={btnKeyboard1}>Keyboard</button>
         </div>
         <br/>
+        <div style={{
+            backgroundColor: '#ececec',
+            fontSize: '25px',
+            textAlign: 'center',
+            minHeight: '50px'
 
-        {
-            styleKeyboard1.display === 'block' ? <Keyboard style1={styleKeyboard1}/> : ''
-        }
+        }}
+        >{state.text1}</div>
 
 
         <div style={styleText1}>
