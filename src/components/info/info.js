@@ -83,7 +83,8 @@ export const Info = () => {
                 borderBottom: "5px solid #555",
                 height: menuState1.heightDynamic + "px",
                 cursor: "s-resize",
-                zIndex: '2'
+                zIndex: '2',
+                userSelect: 'none'
             }}
             onMouseDown={
                 (e) => {
@@ -99,6 +100,7 @@ export const Info = () => {
                     borderRight: "5px solid #555",
                     cursor: "e-resize",
                     width: menuState1.widthDynamic + "px",
+                    userSelect: 'none'
 
                 }}
                 onMouseDown={
@@ -118,6 +120,7 @@ export const Info = () => {
                     flexDirection: "column",
                     overflow: "auto",
                     cursor: "default",
+                    userSelect: 'text'
                 }}
                 >
 

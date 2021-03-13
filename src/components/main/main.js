@@ -71,7 +71,8 @@ export const Main = () => {
                 borderBottom: "5px solid #555",
                 height: state5.heightDynamic + "px",
                 cursor: "s-resize",
-                zIndex: '2'
+                zIndex: '2',
+                userSelect: 'none'
             }}
             onMouseDown={
                 (e) => {
@@ -80,12 +81,12 @@ export const Main = () => {
                     }
                 }}
         >
-
             <div
                 style={{
                     borderRight: "5px solid #555",
                     cursor: "e-resize",
                     width: state5.widthDynamic + "px",
+                    userSelect: 'none'
                 }}
                 onMouseDown={
                     (e) => {
@@ -94,8 +95,6 @@ export const Main = () => {
                         }
                     }}
             >
-
-
                 <div
                     style={{
                         border: "1px solid #777",
@@ -103,6 +102,7 @@ export const Main = () => {
                         height: state5.heightDynamic - 2 + "px",
                         cursor: "default",
                         overflowY: "auto",
+                        userSelect: 'text'
                     }}
                 >
                     <Top/>
