@@ -154,31 +154,31 @@ export const Menu1 = () => {
                                     }}
                                 > {word99[index]} </button>)
                             })
-            }
-            <button
-                onClick={() => {
-                    setMenuState1({dic: !menuState1.dic})
-                }}
-            >dictionary
-                {
-                    menuState1.dic? <>&#9650;</> : <>&#9660;</>
-                }
-            </button>
-            <div
-                style={{...styleDictionary}}
-            >
-                <div style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "flex-end",
-                }}>
-                    {
-                        buttonArr.map(m => {
-                            return m
-                        })
                     }
-                </div>
-            </div>
+                    <button
+                        onClick={() => {
+                            setMenuState1({dic: !menuState1.dic})
+                        }}
+                    >dictionary
+                        {
+                            menuState1.dic ? <>&#9650;</> : <>&#9660;</>
+                        }
+                    </button>
+                    <div
+                        style={{...styleDictionary}}
+                    >
+                        <div style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "flex-end",
+                        }}>
+                            {
+                                buttonArr.map(m => {
+                                    return m
+                                })
+                            }
+                        </div>
+                    </div>
                 </div>
 
             </div>

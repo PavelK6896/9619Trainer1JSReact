@@ -23,7 +23,6 @@ export const Bottom = () => {
     }
 
 
-
     return (<div>
 
         <div
@@ -58,7 +57,7 @@ export const Bottom = () => {
         <div style={styleText1}>
             {
                 state.arr1.map((text, index) => {
-                    return (<p key={index} value={text}><i>({index + 1})</i> <b>{text[0]}</b>&nbsp;-&nbsp;{text[1]}</p>)
+                        return (<p key={index} value={text}><i>({index + 1})</i> <b>{text[0]}</b>&nbsp;-&nbsp;{text[1]}</p>)
                     }
                 )
             }

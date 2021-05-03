@@ -31,7 +31,7 @@ export function App() {
                     flexDirection: "row",
                 }}>
 
-                <Menu1/>
+                    <Menu1/>
                     <Main/>
                     <Info/>
 

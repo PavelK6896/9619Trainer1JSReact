@@ -90,23 +90,22 @@ export const Keyboard = (props) => {
         })
 
 
-
     useEffect(() => {
 
         if (props.style1.display === 'block') {
             const handleDown = (event) => {
 
                 if (event.key === 'CapsLock') {
-                    if ( event.getModifierState('CapsLock')){
-                        if(!uppercaseState.CapsLock){
+                    if (event.getModifierState('CapsLock')) {
+                        if (!uppercaseState.CapsLock) {
                             uppercaseDispatch({type: 'CapsLockTrue'});
                         }
-                    }else{
+                    } else {
                         uppercaseDispatch({type: 'CapsLockFalse'});
                     }
-                }else if (event.key === 'Shift') {
+                } else if (event.key === 'Shift') {
 
-                    if (shift)return
+                    if (shift) return
 
                     if (uppercaseState.CapsLock) {
                         if (uppercaseState.uppercase) {
@@ -118,12 +117,12 @@ export const Keyboard = (props) => {
                         }
                     }
                     shift = true;
-                }else{
-                    setState4({key11: event.key })
+                } else {
+                    setState4({key11: event.key})
                 }
 
-                if ( event.getModifierState('CapsLock')){
-                    if(!uppercaseState.CapsLock){
+                if (event.getModifierState('CapsLock')) {
+                    if (!uppercaseState.CapsLock) {
                         uppercaseDispatch({type: 'CapsLockTrue'});
                     }
                 }
@@ -158,9 +157,6 @@ export const Keyboard = (props) => {
             };
         }
     })
-
-
-
 
 
     return (

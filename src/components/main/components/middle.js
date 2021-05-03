@@ -66,8 +66,6 @@ export const Middle = () => {
         </div>
 
 
-
-
     </div>)
 
 

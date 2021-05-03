@@ -1,4 +1,3 @@
-
 export const psql = [
     ["General", "Общие"],
     ["\\copyright", "условия использования и распространения PostgreSQL"],

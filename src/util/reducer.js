@@ -16,7 +16,7 @@ export function reducer(state, action) {
     function endDictionary() {
         if (state.it + 1 >= state.arr1.length) {//конец словаря
             if (state.allDictionary) {//
-                if (state.arr99.length > state.currentArr) {//следующий словарь
+                if (state.arr99.length > state.currentArr + 1) {//следующий словарь
                     voice(state.arr99[state.currentArr + 1][0][0], state.arr99[state.currentArr + 1][0][1])
                     return {
                         ...state,
@@ -39,7 +39,7 @@ export function reducer(state, action) {
 
                 } else {//первый словарь
 
-
+                    state.currentArr = 0
                     voice(state.arr99[state.currentArr][0][0], state.arr99[state.currentArr][0][1])
                     return {
                         ...state,
