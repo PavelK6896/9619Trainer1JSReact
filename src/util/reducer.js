@@ -179,6 +179,22 @@ export function reducer(state, action) {
                 ...state,
                 check2: !state.check2,
             }
+        case 'startHandler2':
+
+            let a = []
+            if(action.d.content != null){
+                action.d.content.map(m => {
+                    a.push([m.word1,m.translate1])
+                })
+            }
+
+            return {
+                ...state,
+                text1: a[0][1],
+                text2: a[0][0],
+                arr1: a,
+                nameData: 'dic2 = ' + (action.page + 1),
+            }
 
         case 'startHandler':
 

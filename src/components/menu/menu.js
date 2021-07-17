@@ -1,19 +1,22 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {useGlobalContext} from "../../store/global";
 
 export const Menu1 = () => {
-    const {state, startHandler, word99} = useGlobalContext()
+    const {state, startHandler, getApiWords, word99} = useGlobalContext()
     const buttonArr = [];
+    const buttonArr2 = [];
 
     const [menuState1, setMenuState1] = useState(
         {
             dic: false,
+            dic2: false,
             widthDynamic: 200,
-            heightDynamic: 400,
+            heightDynamic: 450,
             clickSizeX: false,
             posX: 0,
             clickSizeY: false,
-            posY: 0
+            posY: 0,
+            totalPages: 343
         })
 
     useEffect(() => {
@@ -78,6 +81,22 @@ export const Menu1 = () => {
 
     let button1W = menuState1.widthDynamic / 1.5;
     // document.documentElement.clientWidth
+
+    useMemo(() => {
+        if (menuState1.dic2) {
+            for (let i = 0; i < menuState1.totalPages; i++) {
+                buttonArr2.push(<button
+                    key={'dic2=' + i}
+                    style={{
+                        width: button1W + "px"
+                    }}
+                    onClick={() => {
+                        getApiWords(i);
+                    }}
+                > dic2 = {(i+1)} </button>)
+            }
+        }
+    }, [button1W, buttonArr2, getApiWords, menuState1.dic2, menuState1.totalPages])
 
     return (
 
@@ -154,10 +173,11 @@ export const Menu1 = () => {
                                     }}
                                 > {word99[index]} </button>)
                             })
+
                     }
                     <button
                         onClick={() => {
-                            setMenuState1({dic: !menuState1.dic})
+                            setMenuState1(prevState => ({...prevState, dic: !menuState1.dic}))
                         }}
                     >dictionary
                         {
@@ -174,6 +194,30 @@ export const Menu1 = () => {
                         }}>
                             {
                                 buttonArr.map(m => {
+                                    return m
+                                })
+                            }
+                        </div>
+                    </div>
+                    <button
+                        onClick={() => {
+                            setMenuState1(prevState => ({...prevState, dic2: !menuState1.dic2}))
+                        }}
+                    >dictionary2
+                        {
+                            menuState1.dic2 ? <>&#9650;</> : <>&#9660;</>
+                        }
+                    </button>
+                    <div
+                        style={menuState1.dic2 ? {display: 'block'} : {display: 'none'}}
+                    >
+                        <div style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "flex-end",
+                        }}>
+                            {
+                                buttonArr2.map(m => {
                                     return m
                                 })
                             }

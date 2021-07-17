@@ -99,6 +99,21 @@ export const GlobalProvider = ({children}) => {
         refBtnStart.current.blur()
     }
 
+    const getApiWords = (page) => {
+        const url = new URL('http://18.156.192.31/api/read1/api/words')
+        url.search = new URLSearchParams({
+            page: page,
+            size: 150,
+        })
+        fetch(url)
+            .then((d) => {
+                return d.json()
+            })
+            .then(d => {
+                dispatch({type: 'startHandler2', d, page})
+            })
+    }
+
     function startHandler(e, nameData = "", d = null, index) {
         dispatch({type: 'startHandler', nameData, index})
         state.res.clear()
@@ -255,6 +270,7 @@ export const GlobalProvider = ({children}) => {
             state,
             word99,
             startHandler,
+            getApiWords,
             check1Handler,
             count1Handler,
             check2Handler,
